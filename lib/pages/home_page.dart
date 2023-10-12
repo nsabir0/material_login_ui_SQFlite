@@ -8,9 +8,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = TextEditingController();
+  List country_list = [ "Bangla", "Hindi", "Urdu"];
 
-   TextEditingController? controller;
-  List country_list=["Bangla", "Hindi", "Urdu",];
+  void _incrementList() {
+    setState(() {
+      print(controller.text.toString());
+
+      country_list.add(controller.text.toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,28 +29,33 @@ class _HomePageState extends State<HomePage> {
             children: [
               TextField(
                 controller: controller,
-                decoration: InputDecoration(border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10)
-                )),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10))),
               ),
-              SizedBox(height: 10,),
-              ElevatedButton(onPressed: (){
-                @override
-                void initState() {
-                  super.initState();String? txt=controller?.text;
-                  country_list.add(txt);
-
-
-                }
-
-              }, child: Text('Add Data', style: TextStyle(fontSize: 10, ),)),
-              Expanded(child: ListView.builder(itemCount: country_list.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    _incrementList();
+                  },
+                  child: const Text(
+                    'Add Data',
+                    style: TextStyle(
+                      fontSize: 10,
+                    ),
+                  )),
+              Expanded(
+                  child: ListView.builder(
+                itemCount: country_list.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                      child: ListTile(
                     title: Text(country_list[index]),
                   ));
-              },))
+                },
+              ))
             ],
           ),
         ),
