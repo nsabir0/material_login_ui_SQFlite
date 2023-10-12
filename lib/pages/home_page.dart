@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(10)
                 )),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               ElevatedButton(onPressed: (){
                 @override
                 void initState() {
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
                 }
 
-              }, child: Text('Add Data', style: TextStyle(fontSize: 10, ),)),
+              }, child: const Text('Add Data', style: TextStyle(fontSize: 10, ),)),
               Expanded(child: ListView.builder(itemCount: country_list.length,
               itemBuilder: (context, index) {
                 return Card(
