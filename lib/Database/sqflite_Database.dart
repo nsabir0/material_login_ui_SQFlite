@@ -1,48 +1,79 @@
-
+import 'package:material_login_ui/Database/sqlQuery_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/userData_model.dart';
+import '../Model/userData_model.dart';
 
 class MyDatabase{
 
-  //Creating/Getting Database in the default location ==========================
-   static Future<Database>initDB()async{
-    var dbPath = await getDatabasesPath();
-    var path = join(dbPath, 'userData.db');
-    
-    return await openDatabase(path, version: 1,onCreate: create_Database);
+  static Database? _database;
+
+//Checking if Database is null=================================================
+  Future<Database?> get checkDB async {
+    if (_database != null) {
+      return _database;
+    }
+    _database = await initDatabase();
+    return _database;
   }
 
-  //Creating the Database Table first time in the database======================
-  static create_Database(Database db, int version)async{
+//Initializing Database=================================================
+  initDatabase() async {
+    var filePath = await getDatabasesPath();
+    var dbPath = join(filePath, 'userdata.db');
 
-     var sql='''CREATE TABLE tbl_userData (id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT)''';
-     db.execute(sql);
+    return await openDatabase(dbPath, version: 1, onCreate: createDatabase);
   }
 
-  //Inserting Data in the Table on Database =====================================
-   static Future<int> insert_userData(userData_Construct userData)async{
-     Database db= await MyDatabase.initDB();
-
-     return await db.insert('tbl_userData', userData.toMap());
+//Creating database=================================================
+  createDatabase(Database db, int version) async {
+    await db.execute(SqlQuery.createUserDataTable);
+  }
+//Inserting new Notes Data in database==========================================
+  Future<userData_Model> insert(userData_Model userData) async {
+    var dbClient = await checkDB;
+    await dbClient!.insert('userdata', userData.toMap());
+    return userData;
   }
 
-  //Reading Data from database Table============================================
-  Future<List<userData_Construct>> read_userDataTable()async{
-     Database db= await MyDatabase.initDB();
-     var userData= await db.query('tbl_userData');
+//Read data from database=================================================
+  Future<List<userData_Model>> getNotesList() async {
+    var dbClient = await checkDB;
 
-     List<userData_Construct> userData_list= userData.isNotEmpty
-     ? userData.map((e) => userData_Construct.fromMap(e)).toList()
-         : [];
-     return userData_list;
-   }
+    final List<Map<String, dynamic>> queryResult =
+    await dbClient!.query('userdata');
+    return queryResult.map((e) => userData_Model.fromMap(e)).toList();
+  }
 
-   //Updating Data from database Table==========================================
-   Future<int> update_userData(userData_Construct userData)async{
-     Database db=await MyDatabase.initDB();
-     return db.update('tbl_userData', userData.toMap(),
-         where: 'id=?', whereArgs: [userData.id]);
-   }
+//Deleting database=================================================
+  Future deleteTableContent() async {
+    var dbClient = await checkDB;
+    return await dbClient!.delete(
+      'userdata',
+    );
+  }
 
+//Updating database=================================================
+  Future<int> updateQuantity(userData_Model userData) async {
+    var dbClient = await checkDB;
+    return await dbClient!.update(
+      'userdata',
+      userData.toMap(),
+      where: 'id = ?',
+      whereArgs: [userData.id],
+    );
+  }
+
+  Future<int> deleteProduct(int id) async {
+    var dbClient = await checkDB;
+    return await dbClient!.delete(
+      'userdata',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future close() async {
+    var dbClient = await checkDB;
+    dbClient!.close();
+  }
 }
