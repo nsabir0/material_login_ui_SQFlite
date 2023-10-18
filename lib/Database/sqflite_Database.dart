@@ -31,7 +31,7 @@ class MyDatabase {
 //Inserting new Notes Data in database==========================================
   Future<userData_Model> insert(userData_Model userData) async {
     var dbClient = await checkDB;
-    await dbClient!.insert('userdata_tbl', userData.toMap());
+    userData.id = await dbClient!.insert('userdata_tbl', userData.toMap());
     return userData;
   }
 
@@ -41,7 +41,8 @@ class MyDatabase {
 
     final List<Map<String, dynamic>> queryResult =
     await dbClient!.query('userdata_tbl');
-    return queryResult.map((e) => userData_Model.fromMap(e)).toList();
+    List<userData_Model> getList = queryResult.map((e) => userData_Model.fromMap(e)).toList();
+    return getList;
   }
 
 //Deleting database=================================================

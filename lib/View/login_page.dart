@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_login_ui/Controller/login_controller.dart';
 import 'package:material_login_ui/components/my_button.dart';
 import 'package:material_login_ui/components/my_textfield.dart';
 import 'package:material_login_ui/components/square_tile.dart';
@@ -9,8 +10,9 @@ import 'package:get/get.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
+  final LoginController _controller= Get.put(LoginController());
   // text editing controllers
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   // sign user in method
@@ -50,8 +52,8 @@ class LoginPage extends StatelessWidget {
 
               //username Text field==============================================
               MyTextField(
-                controller: usernameController,
-                hintText: 'Username',
+                controller: emailController,
+                hintText: 'Email',
                 obscureText: false,
               ),
 
@@ -71,10 +73,25 @@ class LoginPage extends StatelessWidget {
 
               spacing(25),
 
-              //signing button===================================================
-              MyButton(
-                onPressed: signUserIn,
-                buttonText: 'Sign In',
+              //login button===================================================
+              ElevatedButton(
+                onPressed: (){
+                  _controller.loginFunc();
+                  if(emailController.text == _controller.emailController.toString() &&
+                  passwordController.text == _controller.passController.toString()){
+                    Get.snackbar('LOG IN',  'Successful ${emailController.text}');
+                    print('Login Successful');
+                  } else {
+                    Get.snackbar(
+                        'LOG IN', 'Successful ${emailController.text}');
+                    print('Login Successful');
+                  }
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                child: const Text('LOG IN',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                ),
               ),
 
               spacing(45),

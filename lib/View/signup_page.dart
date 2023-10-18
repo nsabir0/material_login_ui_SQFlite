@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_login_ui/Controller/signup_controller.dart';
+import 'package:material_login_ui/View/login_page.dart';
 import 'package:material_login_ui/components/my_button.dart';
 import 'package:material_login_ui/components/my_textfield.dart';
 
@@ -11,10 +14,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  // text editing controllers
-  final fullnameController = TextEditingController();
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+
+  final SignupController _controller= Get.put(SignupController());
+
 
   // sign user in method
   void signUserIn() {}
@@ -26,112 +28,106 @@ class _SignupState extends State<Signup> {
       body: SingleChildScrollView(
         child: Center(
           child:
-              //all childrens under this main column============================
-              Column(
+          //all children under this main column============================
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
+              spacing(30),
 
               //Lock icon=======================================================
-              const Icon(
-                Icons.android,
-                size: 100,
-              ),
+              const Icon(Icons.android, size: 100),
 
               //Welcome Text====================================================
-              Text(
-                'Ready to join the team?',
+              Text('Ready to join the team?',
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: 16,
                 ),
               ),
 
-              const SizedBox(height: 15),
+              spacing(15),
 
-              //Fullname Textfield==============================================
+              //Fullname Text field==============================================
               MyTextField(
-                controller: fullnameController,
+                controller: _controller.nameController.value,
                 hintText: 'Full Name',
                 obscureText: false,
               ),
 
-              const SizedBox(height: 10),
+              spacing(10),
 
-              //username Textfield==============================================
+              //username Text field==============================================
               MyTextField(
-                controller: usernameController,
+                controller: _controller.emailController.value,
                 hintText: 'Username',
                 obscureText: false,
               ),
 
-              const SizedBox(height: 10),
+              spacing(10),
 
-              //password textfield==============================================
+              //password text-field==============================================
               MyTextField(
-                controller: passwordController,
+                controller: _controller.passController.value,
                 hintText: 'Password',
                 obscureText: true,
               ),
 
-              const SizedBox(height: 10),
+              spacing(10),
 
               //Confirm password textfield==============================================
               MyTextField(
-                controller: passwordController,
+                controller: _controller.cfpassController.value,
                 hintText: 'Confirm Password',
                 obscureText: true,
               ),
 
-              const SizedBox(height: 10),
+              spacing(25),
 
-              //forgot password=================================================
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
+              //signin button===================================================
+              ElevatedButton(
+                onPressed: (){
+                  _controller.signupFunc();
+                  //Get.to(LoginPage());
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                child: const Text('JOIN US',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
 
-              const SizedBox(height: 25),
-
-              //signin button===================================================
-              MyButton(onPressed: signUserIn, buttonText: 'Sign Out'),
-
-              const SizedBox(height: 45),
+              spacing(45),
 
               //register text===================================================
-              RichText(
-                text: TextSpan(children: [
-                  const TextSpan(
-                    text: 'Not a member?  ',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  TextSpan(
-                      text: 'Register Now',
-                      style: const TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Signup()),
-                          );
-                        }),
-                ]),
-              ),
+              loginNowText(),
 
-              const SizedBox(height: 45),
+              spacing(45),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+Widget spacing(double h) {
+  return SizedBox(height: h);
+}
+
+Widget loginNowText() {
+  return RichText(
+    text: TextSpan(children: [
+      const TextSpan(
+        text: 'Already a member?  ',
+        style: TextStyle(color: Colors.black),
+      ),
+      TextSpan(
+          text: 'Login Now',
+          style: const TextStyle(color: Colors.blue),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              Get.to(const Signup());
+            }),
+    ]),
+  );
 }
