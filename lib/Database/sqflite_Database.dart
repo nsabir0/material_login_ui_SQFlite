@@ -3,8 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../Model/userData_model.dart';
 
-class MyDatabase{
-
+class MyDatabase {
   static Database? _database;
 
 //Checking if Database is null=================================================
@@ -19,7 +18,7 @@ class MyDatabase{
 //Initializing Database=================================================
   initDatabase() async {
     var filePath = await getDatabasesPath();
-    var dbPath = join(filePath, 'userdata.db');
+    var dbPath = join(filePath, 'userdata_tbl.db');
 
     return await openDatabase(dbPath, version: 1, onCreate: createDatabase);
   }
@@ -28,51 +27,50 @@ class MyDatabase{
   createDatabase(Database db, int version) async {
     await db.execute(SqlQuery.createUserDataTable);
   }
+
 //Inserting new Notes Data in database==========================================
   Future<userData_Model> insert(userData_Model userData) async {
     var dbClient = await checkDB;
-    await dbClient!.insert('userdata', userData.toMap());
+    await dbClient!.insert('userdata_tbl', userData.toMap());
     return userData;
   }
 
 //Read data from database=================================================
-  Future<List<userData_Model>> getNotesList() async {
+  Future<List<userData_Model>> getUserDataList() async {
     var dbClient = await checkDB;
 
     final List<Map<String, dynamic>> queryResult =
-    await dbClient!.query('userdata');
+    await dbClient!.query('userdata_tbl');
     return queryResult.map((e) => userData_Model.fromMap(e)).toList();
   }
 
 //Deleting database=================================================
   Future deleteTableContent() async {
     var dbClient = await checkDB;
-    return await dbClient!.delete(
-      'userdata',
-    );
+    return await dbClient!.delete('userdata_tbl');
   }
 
 //Updating database=================================================
-  Future<int> updateQuantity(userData_Model userData) async {
+  Future<int> updateUserData(userData_Model userData) async {
     var dbClient = await checkDB;
     return await dbClient!.update(
-      'userdata',
+      'userdata_tbl',
       userData.toMap(),
       where: 'id = ?',
       whereArgs: [userData.id],
     );
   }
 
-  Future<int> deleteProduct(int id) async {
+  Future<int> deleteUserData(int id) async {
     var dbClient = await checkDB;
     return await dbClient!.delete(
-      'userdata',
+      'userdata_tbl',
       where: 'id = ?',
       whereArgs: [id],
     );
   }
 
-  Future close() async {
+  Future closeDatabase() async {
     var dbClient = await checkDB;
     dbClient!.close();
   }

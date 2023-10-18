@@ -1,7 +1,7 @@
 import 'dart:core';
 
 class SqlQuery {
-  static const String userdataTable = 'notes';
+  static const String userdataTable = 'userdata_tbl';
   static const String column_id = 'id';
   static const String column_name = 'title';
   static const String column_email = 'age';
