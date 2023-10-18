@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_login_ui/View/home_page.dart';
+import 'package:get/get.dart';
 import 'package:material_login_ui/View/login_page.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
     );
