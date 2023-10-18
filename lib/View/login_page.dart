@@ -4,6 +4,7 @@ import 'package:material_login_ui/components/my_textfield.dart';
 import 'package:material_login_ui/components/square_tile.dart';
 import 'package:material_login_ui/View/signup_page.dart';
 import 'package:flutter/gestures.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -21,32 +22,31 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.grey[300],
       body:
 
-          //For Scrolling=======================================================
-          SingleChildScrollView(
+      //For Scrolling=======================================================
+      SingleChildScrollView(
         child: Center(
           child:
 
-              //all childrens under this main column============================
-              Column(
+          //all childrens under this main column============================
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 50),
 
               //Lock icon=======================================================
-              const Icon(Icons.lock, size: 100),
+              const Icon(Icons.android, size: 100),
 
               const SizedBox(height: 50),
 
               //Welcome Text====================================================
-              Text(
-                'Welcome back you\'ve been missed!',
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 16,
-                ),
+              Text('Welcome back you\'ve been missed!',
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 16,
+                  )
               ),
 
-              const SizedBox(height: 25),
+              spacing(25),
 
               //username Text field==============================================
               MyTextField(
@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                 obscureText: false,
               ),
 
-              const SizedBox(height: 10),
+              spacing(10),
 
               //password text-field==============================================
               MyTextField(
@@ -64,23 +64,12 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
               ),
 
-              const SizedBox(height: 10),
+              spacing(10),
 
               //forgot password=================================================
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
-                  ],
-                ),
-              ),
+              forgotPassword(),
 
-              const SizedBox(height: 25),
+              spacing(25),
 
               //signing button===================================================
               MyButton(
@@ -88,76 +77,103 @@ class LoginPage extends StatelessWidget {
                 buttonText: 'Sign In',
               ),
 
-              const SizedBox(height: 45),
+              spacing(45),
 
               //OR decider===============================
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[500],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Or continue with',
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[500],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              orDivider(),
 
-              const SizedBox(height: 45),
+              spacing(45),
 
               //two buttons=====================================================
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SquareTile(imagePath: 'lib/images/google.png'),
-                  SizedBox(width: 25),
-                  SquareTile(imagePath: 'lib/images/apple.png')
-                ],
-              ),
+              socialButtons(),
 
-              const SizedBox(height: 45),
+              spacing(45),
 
               //register text===================================================
-              RichText(
-                text: TextSpan(children: [
-                  const TextSpan(
-                    text: 'Not a member?  ',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  TextSpan(
-                      text: 'Register Now',
-                      style: const TextStyle(color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Signup()),
-                          );
-                        }),
-                ]),
-              ),
+              registerNowText(),
 
-              const SizedBox(height: 45),
+              spacing(45),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+Widget forgotPassword() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          'Forgot Password?',
+          style: TextStyle(color: Colors.grey[600]),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget orDivider() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+    child: Row(
+      children: [
+        Expanded(
+          child: Divider(
+            thickness: 0.5,
+            color: Colors.grey[500],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Text(
+            'Or continue with',
+            style: TextStyle(color: Colors.grey[700]),
+          ),
+        ),
+        Expanded(
+          child: Divider(
+            thickness: 0.5,
+            color: Colors.grey[500],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget socialButtons() {
+  return const Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SquareTile(imagePath: 'lib/images/google.png'),
+      SizedBox(width: 25),
+      SquareTile(imagePath: 'lib/images/apple.png')
+    ],
+  );
+}
+
+Widget spacing(double h) {
+  return SizedBox(height: h);
+}
+
+Widget registerNowText() {
+  return RichText(
+    text: TextSpan(children: [
+      const TextSpan(
+        text: 'Not a member?  ',
+        style: TextStyle(color: Colors.black),
+      ),
+      TextSpan(
+          text: 'Register Now',
+          style: const TextStyle(color: Colors.blue),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              Get.to(const Signup());
+            }),
+    ]),
+  );
 }

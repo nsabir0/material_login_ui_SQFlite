@@ -8,5 +8,5 @@ class SqlQuery {
   static const String column_pass = 'description';
 
   static const String createUserDataTable =
-      "CREATE TABLE ${SqlQuery.userdataTable} (${SqlQuery.column_id} INTEGER PRIMARY KEY AUTOINCREMENT, ${SqlQuery.column_name} TEXT NOT NULL, ${SqlQuery.column_email} INTEGER NOT NULL, ${SqlQuery.column_pass} TEXT NOT NULL)";
+      '''CREATE TABLE ${SqlQuery.userdataTable} (${SqlQuery.column_id} INTEGER PRIMARY KEY AUTOINCREMENT, ${SqlQuery.column_name} TEXT NOT NULL, ${SqlQuery.column_email} INTEGER NOT NULL, ${SqlQuery.column_pass} TEXT NOT NULL)''';
 }
