@@ -79,18 +79,27 @@ class LoginPage extends StatelessWidget {
                   //_controller.loginFunc();
                   //await _myDatabase.queryData();
 
+                  String _name='',_email='', _password='';
+
                   List<userData_Model> _info= await _myDatabase.queryData();
                   for(int i=0; i < _info.length; i++){
-                    print('${_info[i].email}');
-                    if(_info[i].email==_controller.emailController.text.toString() &&
-                        _info[i].password==_controller.passController.text.toString()){
-                      Get.snackbar('Hello ${_info[i].email}',  'Logged In successfully ');
-                    } //else Get.snackbar('SORRY',  'User Not Found!!! ');
-                    else if(_info[i].email==_controller.emailController.text.toString() &&
-                        _info[i].password!=_controller.passController.text.toString()){
-                      Get.snackbar('Try Again',  'Wrong password');
+                    if(_info[i].email==_controller.emailController.text.toString()){
+                      _name=_info[i].name;
+                      _email=_info[i].email;
+                      _password=_info[i].password;
+                      //Get.snackbar('Congrats',  'User Found');
                     }
 
+                  };
+
+
+                  if(_email==_controller.emailController.text.toString() &&
+                      _password==_controller.passController.text.toString()){
+                    Get.snackbar('Hello $_name',  'Logged In successfully ');
+                  } //else Get.snackbar('SORRY',  'User Not Found!!! ');
+                  else if(_email==_controller.emailController.text.toString() &&
+                      _password!=_controller.passController.text.toString()){
+                    Get.snackbar('Try Again',  'Wrong password');
                   }
 
                   /*if(_info[1].email==_controller.emailController.text.toString() &&
