@@ -77,21 +77,30 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: ()async{
                   //_controller.loginFunc();
-                  /*List<userData_Model> _info= await _myDatabase.queryData();
-                  for(int i=0, i < _info.length; i++){
+                  //await _myDatabase.queryData();
+
+                  List<userData_Model> _info= await _myDatabase.queryData();
+                  for(int i=0; i < _info.length; i++){
+                    print('${_info[i].email}');
+                    if(_info[i].email==_controller.emailController.text.toString() &&
+                        _info[i].password==_controller.passController.text.toString()){
+                      Get.snackbar('Hello ${_info[i].email}',  'Logged In successfully ');
+                    } //else Get.snackbar('SORRY',  'User Not Found!!! ');
+                    else if(_info[i].email==_controller.emailController.text.toString() &&
+                        _info[i].password!=_controller.passController.text.toString()){
+                      Get.snackbar('Try Again',  'Wrong password');
+                    }
 
                   }
 
-                  if(_info[1].email==_controller.emailController.text.toString() &&
+                  /*if(_info[1].email==_controller.emailController.text.toString() &&
                       _info[1].password == _controller.passController.text.toString()){
-                    Get.snackbar('Hello ${_controller.emailController.text.toString()}',  'Logged In successfully ');
+                    Get.snackbar('Hello ${_controller.emailController.text.toString()}', 'Logged In successfully ');
                     print('Logged In Successfully');
                   }else {
                     Get.snackbar('Error!!!}',  'Log In Unsuccessful');
                     print('Log In Unsuccessful');
                   };*/
-
-                  await _myDatabase.queryData();
 
 
 
