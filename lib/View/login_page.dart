@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_login_ui/Controller/login_controller.dart';
-import 'package:material_login_ui/components/my_button.dart';
+import 'package:material_login_ui/Database/sqflite_Database.dart';
 import 'package:material_login_ui/components/my_textfield.dart';
 import 'package:material_login_ui/components/square_tile.dart';
 import 'package:material_login_ui/View/signup_page.dart';
@@ -11,9 +11,8 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final LoginController _controller= Get.put(LoginController());
-  // text editing controllers
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  MyDatabase _myDatabase = MyDatabase();
+
 
   // sign user in method
   void signUserIn() {}
@@ -29,7 +28,7 @@ class LoginPage extends StatelessWidget {
         child: Center(
           child:
 
-          //all childrens under this main column============================
+          //all children under this main column============================
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -52,7 +51,7 @@ class LoginPage extends StatelessWidget {
 
               //username Text field==============================================
               MyTextField(
-                controller: emailController,
+                controller: _controller.emailController.value,
                 hintText: 'Email',
                 obscureText: false,
               ),
@@ -61,7 +60,7 @@ class LoginPage extends StatelessWidget {
 
               //password text-field==============================================
               MyTextField(
-                controller: passwordController,
+                controller: _controller.passController.value,
                 hintText: 'Password',
                 obscureText: true,
               ),
@@ -76,16 +75,8 @@ class LoginPage extends StatelessWidget {
               //login button===================================================
               ElevatedButton(
                 onPressed: (){
-                  _controller.loginFunc();
-                  if(emailController.text == _controller.emailController.toString() &&
-                  passwordController.text == _controller.passController.toString()){
-                    Get.snackbar('LOG IN',  'Successful ${emailController.text}');
-                    print('Login Successful');
-                  } else {
-                    Get.snackbar(
-                        'LOG IN', 'Successful ${emailController.text}');
-                    print('Login Successful');
-                  }
+                  //_controller.loginFunc();
+                  _myDatabase.queryData();
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 child: const Text('LOG IN',

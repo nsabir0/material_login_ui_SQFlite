@@ -4,27 +4,32 @@ import 'package:material_login_ui/Database/sqflite_Database.dart';
 import 'package:material_login_ui/Model/userData_model.dart';
 
 class SignupController extends GetxController{
-  Rx<TextEditingController> nameController= TextEditingController().obs;
-  Rx<TextEditingController> emailController= TextEditingController().obs;
-  Rx<TextEditingController> passController= TextEditingController().obs;
-  Rx<TextEditingController> cfpassController= TextEditingController().obs;
+  TextEditingController nameController= TextEditingController();
+  TextEditingController emailController= TextEditingController();
+  TextEditingController passController= TextEditingController();
+  TextEditingController cfpassController= TextEditingController();
 
   signupFunc()async{
 
     userData_Model saveData = userData_Model(
-        name: nameController.toString(),
-        email: emailController.toString(),
-        password: passController.toString(),
+      name: nameController.text.toString(),
+      email: emailController.text.toString(),
+      password: passController.text.toString(),
     );
 
     MyDatabase myDatabase=MyDatabase();
 
+    List<userData_Model> userList = await myDatabase.getUserDataList();
+    //userList.length;
+    print('${userList.length}');
+
     userData_Model model = await myDatabase.insert(saveData);
 
+
     if(model.id!=null && model.id!=0){
-      Get.snackbar('Registration',  'Data Saved successfully ${model.name}');
+      Get.snackbar('Hello ${model.name}',  'Data Saved successfully ');
       print('Data Saved Successfully');
-    }
+    }else
     print('Error!!!');
 
   }

@@ -9,4 +9,5 @@ class SqlQuery {
 
   static const String createUserDataTable =
       "CREATE TABLE ${SqlQuery.userdataTable} (${SqlQuery.column_id} INTEGER PRIMARY KEY AUTOINCREMENT, ${SqlQuery.column_name} TEXT NOT NULL, ${SqlQuery.column_email} TEXT NOT NULL, ${SqlQuery.column_pass} TEXT NOT NULL)";
+
 }
