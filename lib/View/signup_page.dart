@@ -92,8 +92,8 @@ class _SignupState extends State<Signup> {
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
                       print('Form is valid');
-                      if (_controller.passController!= _controller.cfpassController){
-                        //_controller.cfpassController.clear();
+                      /*if (_controller.passController!= _controller.cfpassController){
+                        _controller.cfpassController.clear();
                         showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
@@ -108,13 +108,14 @@ class _SignupState extends State<Signup> {
                           ),
                         );
                       }
-                      else {
-                       //_controller.signupFunc();
-                      }
+                      else if (_controller.passController== _controller.cfpassController){
+                        _formKey.currentState?.save();
+                       _controller.signupFunc();
+                      }*/
                     } else {
                       print('Form is invalid');
                     }
-                    //_controller.signupFunc();
+                    _controller.signupFunc();
                     //Get.to(LoginPage());
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.black),

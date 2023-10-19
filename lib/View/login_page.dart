@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_login_ui/Controller/login_controller.dart';
 import 'package:material_login_ui/Database/sqflite_Database.dart';
+import 'package:material_login_ui/Model/userData_model.dart';
 import 'package:material_login_ui/components/my_textfield.dart';
 import 'package:material_login_ui/components/square_tile.dart';
 import 'package:material_login_ui/View/signup_page.dart';
@@ -51,7 +52,7 @@ class LoginPage extends StatelessWidget {
 
               //username Text field==============================================
               MyTextField(
-                controller: _controller.emailController.value,
+                controller: _controller.emailController,
                 hintText: 'Email',
                 obscureText: false,
               ),
@@ -60,7 +61,7 @@ class LoginPage extends StatelessWidget {
 
               //password text-field==============================================
               MyTextField(
-                controller: _controller.passController.value,
+                controller: _controller.passController,
                 hintText: 'Password',
                 obscureText: true,
               ),
@@ -74,9 +75,26 @@ class LoginPage extends StatelessWidget {
 
               //login button===================================================
               ElevatedButton(
-                onPressed: (){
+                onPressed: ()async{
                   //_controller.loginFunc();
-                  _myDatabase.queryData();
+                  /*List<userData_Model> _info= await _myDatabase.queryData();
+                  for(int i=0, i < _info.length; i++){
+
+                  }
+
+                  if(_info[1].email==_controller.emailController.text.toString() &&
+                      _info[1].password == _controller.passController.text.toString()){
+                    Get.snackbar('Hello ${_controller.emailController.text.toString()}',  'Logged In successfully ');
+                    print('Logged In Successfully');
+                  }else {
+                    Get.snackbar('Error!!!}',  'Log In Unsuccessful');
+                    print('Log In Unsuccessful');
+                  };*/
+
+                  await _myDatabase.queryData();
+
+
+
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 child: const Text('LOG IN',

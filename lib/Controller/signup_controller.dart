@@ -19,13 +19,15 @@ class SignupController extends GetxController{
 
     MyDatabase myDatabase=MyDatabase();
 
-    List<userData_Model> userList = await myDatabase.getUserDataList();
-    //userList.length;
-    print('${userList.length}');
+    //List<userData_Model> userList = await myDatabase.getUserDataList();
 
     userData_Model model = await myDatabase.insert(saveData);
 
-
+    nameController.clear();
+    passController.clear();
+    emailController.clear();
+    cfpassController.clear();
+    
     if(model.id!=null && model.id!=0){
       Get.snackbar('Hello ${model.name}',  'Data Saved successfully ');
       print('Data Saved Successfully');

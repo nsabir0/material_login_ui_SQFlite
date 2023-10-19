@@ -56,28 +56,47 @@ class MyDatabase {
     return UserDataList;
   }
 
-  /*Future<userData_Model> getLoginUser(String email, String password) async {
+  Future<userData_Model?> getLoginUser(String email, String password) async {
+    print('Email: $email, Password: $password');
     var dbClient = await checkDB;
     var res = await dbClient!.rawQuery("SELECT * FROM userdata_tbl WHERE "
-        "$column_email = '$email' AND "
-        "$column_password = '$password' ");
-    if (res.length > 0) {
-      return UserModel.fromMap (res I first);
-      return null;
+        "email = '$email' AND "
+        "password = '$password' ");
+    /*if (res.length > 0) {
+      print(userData_Model.fromMap(res.first));
+      return userData_Model.fromMap(res.first);
     }*/
+    //return null;
+    }
 
   queryData() async {
     var dbClient = await checkDB;
 
-    List<Map> resultAll = await dbClient!.query('userdata_tbl');
-    List<Map> result = await dbClient.rawQuery('SELECT * FROM userdata_tbl WHERE id=?', [1]);
+    List<Map<String, dynamic>> resultAll = await dbClient!.query('userdata_tbl');
+    List<Map<String, dynamic>> result = await dbClient.rawQuery('SELECT * FROM userdata_tbl WHERE id=?', [1]);
+
+    List<userData_Model> getList = resultAll.map((e) => userData_Model.fromMap(e)).toList();
+
+
+    print('${userData_Model}');
 
     // print the results
+
     print('${resultAll.length}');
+
     resultAll.forEach((row) => print(row));
 
-    result.forEach((row) => print(row));
+    //result.forEach((row) => print(row));
     // {_id: 2, name: Mary, age: 32}
+
+    return List.generate(resultAll.length, (i) {
+      return userData_Model(
+        id: resultAll[i]['id'],
+        name: resultAll[i]['name'],
+        email: resultAll[i]['email'],
+        password: resultAll[i]['password'],
+      );
+    });
   }
 
 //Deleting database=================================================
