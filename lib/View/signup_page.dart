@@ -92,6 +92,7 @@ class _SignupState extends State<Signup> {
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
                       print('Form is valid');
+                      _controller.signupFunc();
                       /*if (_controller.passController!= _controller.cfpassController){
                         _controller.cfpassController.clear();
                         showDialog<String>(
@@ -115,7 +116,7 @@ class _SignupState extends State<Signup> {
                     } else {
                       print('Form is invalid');
                     }
-                    _controller.signupFunc();
+
                     //Get.to(LoginPage());
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
