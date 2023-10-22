@@ -5,13 +5,11 @@ import 'package:material_login_ui/Controller/signup_controller.dart';
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final bool obscureText;
 
   const MyTextField({
     super.key,
     required this.controller,
     required this.hintText,
-    required this.obscureText,
   });
 
   @override
@@ -22,8 +20,8 @@ class MyTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
         controller: controller,
-        obscureText: obscureText,
         decoration: InputDecoration(
+          prefixIcon:  Icon(hintText=='Email' ? Icons.email_outlined : Icons.person_outline),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),

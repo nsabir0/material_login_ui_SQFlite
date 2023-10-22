@@ -45,6 +45,33 @@ class MyDatabase {
     return getList;
   }
 
+  queryData() async {
+    var dbClient = await checkDB;
+
+    //Fetching all ROWs from UserData Table=====================================
+    List<Map<String, dynamic>> resultAll = await dbClient!.query('userdata_tbl');
+
+
+    List<userData_Model> getList = resultAll.map((e) => userData_Model.fromMap(e)).toList();
+    List<Map<String, dynamic>> result = await dbClient.rawQuery('SELECT * FROM userdata_tbl WHERE id=?', [1]);
+
+    // print the results
+    print('${resultAll.length}');
+    resultAll.forEach((row) => print(row));
+    //result.forEach((row) => print(row));
+    // {_id: 2, name: Mary, age: 32}
+
+    //Returning Userdata as List of model object
+    return List.generate(resultAll.length, (i) {
+      return userData_Model(
+        id: resultAll[i]['id'],
+        name: resultAll[i]['name'],
+        email: resultAll[i]['email'],
+        password: resultAll[i]['password'],
+      );
+    });
+  }
+
   //Read data by single id from database=================================================
   Future<List<userData_Model>> getUserDataByEmail(String email) async {
     var dbClient = await checkDB;
@@ -67,37 +94,8 @@ class MyDatabase {
       return userData_Model.fromMap(res.first);
     }*/
     //return null;
-    }
-
-  queryData() async {
-    var dbClient = await checkDB;
-
-    List<Map<String, dynamic>> resultAll = await dbClient!.query('userdata_tbl');
-    List<Map<String, dynamic>> result = await dbClient.rawQuery('SELECT * FROM userdata_tbl WHERE id=?', [1]);
-
-    List<userData_Model> getList = resultAll.map((e) => userData_Model.fromMap(e)).toList();
-
-
-    print('${userData_Model}');
-
-    // print the results
-
-    print('${resultAll.length}');
-
-    resultAll.forEach((row) => print(row));
-
-    //result.forEach((row) => print(row));
-    // {_id: 2, name: Mary, age: 32}
-
-    return List.generate(resultAll.length, (i) {
-      return userData_Model(
-        id: resultAll[i]['id'],
-        name: resultAll[i]['name'],
-        email: resultAll[i]['email'],
-        password: resultAll[i]['password'],
-      );
-    });
   }
+
 
 //Deleting database=================================================
   Future deleteTableContent() async {

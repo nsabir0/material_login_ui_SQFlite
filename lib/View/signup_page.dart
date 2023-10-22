@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/signup_controller.dart';
 import 'package:material_login_ui/View/login_page.dart';
-import 'package:material_login_ui/components/my_button.dart';
-import 'package:material_login_ui/components/my_textfield.dart';
+import 'package:material_login_ui/Global_Widgets/my_button.dart';
+import 'package:material_login_ui/Global_Widgets/my_password.dart';
+import 'package:material_login_ui/Global_Widgets/my_textfield.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -49,7 +50,6 @@ class _SignupState extends State<Signup> {
                 MyTextField(
                   controller: _controller.nameController,
                   hintText: 'Full Name',
-                  obscureText: false,
                 ),
 
                 spacing(10),
@@ -58,32 +58,29 @@ class _SignupState extends State<Signup> {
                 MyTextField(
                   controller: _controller.emailController,
                   hintText: 'Email',
-                  obscureText: false,
                 ),
 
                 spacing(10),
 
                 //password text-field==============================================
-                MyTextField(
+                MyPassField(
                   controller: _controller.passController,
                   hintText: 'Password',
-                  obscureText: true,
                 ),
 
                 spacing(10),
 
                 //Confirm password textfield==============================================
-                MyTextField(
+                MyPassField(
                   controller: _controller.cfpassController,
                   hintText: 'Confirm Password',
-                  obscureText: true,
                 ),
 
                 spacing(25),
 
                 //signin button===================================================
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
                       print('Form is valid');

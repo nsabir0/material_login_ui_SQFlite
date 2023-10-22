@@ -2,33 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/signup_controller.dart';
 
-class MyTextField extends StatelessWidget {
+class MyPassField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final bool obscureText;
 
-  const MyTextField({
+  const MyPassField({
     super.key,
     required this.controller,
     required this.hintText,
-    required this.obscureText,
   });
 
   @override
   Widget build(BuildContext context) {
     final SignupController _controller = Get.put(SignupController());
-    RxBool passOnOff = false.obs;
-    if (obscureText==true) {
-      passOnOff = true.obs;
-    }
+    var passOnOff = true.obs;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextFormField(
+      child: Obx(() =>TextFormField(
         controller: controller,
-        obscureText: obscureText,
+        obscureText: passOnOff.value,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.lock_outlined),
-          suffixIcon: Obx(() =>InkWell(
+          prefixIcon:  Icon(hintText=='Password' ? Icons.lock_outlined : Icons.lock_clock_outlined),
+          suffixIcon: InkWell(
             onTap: () {
               passOnOff.value=!passOnOff.value;
             },
@@ -37,7 +33,7 @@ class MyTextField extends StatelessWidget {
                 : Icons.visibility),
 
           ),
-          ),
+
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
@@ -59,6 +55,7 @@ class MyTextField extends StatelessWidget {
           }
         },
       ),
+    ),
     );
   }
 }

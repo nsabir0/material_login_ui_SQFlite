@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_login_ui/Controller/login_controller.dart';
-import 'package:material_login_ui/components/my_textfield.dart';
-import 'package:material_login_ui/components/square_tile.dart';
+import 'package:material_login_ui/Global_Widgets//my_password.dart';
+import 'package:material_login_ui/Global_Widgets/my_textfield.dart';
+import 'package:material_login_ui/Global_Widgets/square_tile.dart';
 import 'package:material_login_ui/View/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
@@ -43,16 +44,14 @@ class LoginPage extends StatelessWidget {
                 MyTextField(
                   controller: _controller.emailController,
                   hintText: 'Email',
-                  obscureText: false,
                 ),
 
                 spacing(10),
 
                 //password text-field===========================================
-                MyTextField(
+                MyPassField(
                   controller: _controller.passController,
                   hintText: 'Password',
-                  obscureText: true,
                 ),
 
                 spacing(10),
@@ -65,8 +64,6 @@ class LoginPage extends StatelessWidget {
                 //login button==================================================
                 ElevatedButton(
                   onPressed: () async {
-                    //_controller.loginFunc();
-                    //await _myDatabase.queryData();
 
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
