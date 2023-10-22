@@ -24,12 +24,12 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
+                spacing(50),
 
                 //Lock icon=====================================================
                 const Icon(Icons.android, size: 100),
 
-                const SizedBox(height: 50),
+                spacing(50),
 
                 //Welcome Text==================================================
                 Text('Welcome back you\'ve been missed!',

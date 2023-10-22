@@ -104,7 +104,7 @@ class MyDatabase {
   }
 
 //Updating database=================================================
-  Future<int> updateUserData(userData_Model userData) async {
+  Future updateUserData(userData_Model userData) async {
     var dbClient = await checkDB;
     return await dbClient!.update(
       'userdata_tbl',
@@ -113,6 +113,7 @@ class MyDatabase {
       whereArgs: [userData.id],
     );
   }
+
 
   Future<int> deleteUserData(int id) async {
     var dbClient = await checkDB;

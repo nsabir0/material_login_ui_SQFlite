@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_login_ui/Controller/profile_controller.dart';
+import 'package:material_login_ui/Global_Widgets/my_editfield.dart';
+import 'package:material_login_ui/Model/userData_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,8 +12,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = TextEditingController();
-  List country_list = [ "Bangla", "Hindi", "Urdu"];
+  final ProfileController _controller = Get.put(ProfileController());
+  userData_Model userData = Get.arguments;
+/*  List country_list = [ "Bangla", "Hindi", "Urdu"];
 
   void _incrementList() {
     setState(() {
@@ -17,49 +22,59 @@ class _HomePageState extends State<HomePage> {
 
       country_list.add(controller.text.toString());
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 10),
-        child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                controller: controller,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10))),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    _incrementList();
-                  },
-                  child: const Text(
-                    'Add Data',
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
-                  )),
-              Expanded(
-                  child: ListView.builder(
-                itemCount: country_list.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                      child: ListTile(
-                    title: Text(country_list[index]),
-                  ));
-                },
-              ))
+
+              spacing(30),
+
+              //Lock icon=====================================================
+              const Icon(Icons.person, size: 100),
+
+              spacing(10),
+
+              //Welcome Text==================================================
+              Text('Welcome back, This is your Profile',
+                  style: TextStyle(color: Colors.grey[700], fontSize: 16)),
+
+              spacing(10),
+
+              MyEditField(controller: _controller.nameController, hintText: userData.name),
+              MyEditField(controller: _controller.emailController, hintText: userData.email),
+              MyEditField(controller: _controller.passController, hintText: userData.password),
+              spacing(10),
+
+              ElevatedButton(onPressed: ()async{
+                //_controller.DeleteUser(userData.id);
+
+              },
+                  style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
+          child: const Text(
+            'Delete Profile',
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16),
+          ),)
+
+
             ],
           ),
         ),
       ),
     );
   }
+}
+
+Widget spacing(double h) {
+  return SizedBox(height: h);
 }
