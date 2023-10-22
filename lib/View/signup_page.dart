@@ -14,15 +14,10 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-
-  final SignupController _controller= Get.put(SignupController());
-
-
+  final SignupController _controller = Get.put(SignupController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void validateAndSave() {
-
-  }
+  void validateAndSave() {}
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +57,7 @@ class _SignupState extends State<Signup> {
                 //username Text field==============================================
                 MyTextField(
                   controller: _controller.emailController,
-                  hintText: 'Username',
+                  hintText: 'Email',
                   obscureText: false,
                 ),
 
@@ -88,41 +83,25 @@ class _SignupState extends State<Signup> {
 
                 //signin button===================================================
                 ElevatedButton(
-                  onPressed: (){
+                  onPressed: () {
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
                       print('Form is valid');
                       _controller.signupFunc();
-                      /*if (_controller.passController!= _controller.cfpassController){
-                        _controller.cfpassController.clear();
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Alert !'),
-                            content: const Text('Password didn\'t match.'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                      else if (_controller.passController== _controller.cfpassController){
-                        _formKey.currentState?.save();
-                       _controller.signupFunc();
-                      }*/
                     } else {
                       print('Form is invalid');
                     }
 
-                    //Get.to(LoginPage());
+                    Get.to(LoginPage());
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text('JOIN US',
+                  style:
+                  ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: const Text(
+                    'JOIN US',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                 ),
 
@@ -162,3 +141,24 @@ Widget loginNowText() {
     ]),
   );
 }
+
+/*if (_controller.passController!= _controller.cfpassController){
+                        _controller.cfpassController.clear();
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Alert !'),
+                            content: const Text('Password didn\'t match.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      else if (_controller.passController== _controller.cfpassController){
+                        _formKey.currentState?.save();
+                       _controller.signupFunc();
+                      }*/

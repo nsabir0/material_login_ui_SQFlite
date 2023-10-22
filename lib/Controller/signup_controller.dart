@@ -31,8 +31,9 @@ class SignupController extends GetxController{
     if(model.id!=null && model.id!=0){
       Get.snackbar('Hello ${model.name}',  'Data Saved successfully ');
       print('Data Saved Successfully');
-    }else
-    print('Error!!!');
-
+    }else {
+      Get.snackbar('Error!!!', 'Data Didn\'t Saved');
+      print('Error!!!');
+    }
   }
 }

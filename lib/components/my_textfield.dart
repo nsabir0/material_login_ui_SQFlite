@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_login_ui/Controller/signup_controller.dart';
 
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -14,6 +16,8 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SignupController _controller = Get.put(SignupController());
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextFormField(
@@ -31,9 +35,13 @@ class MyTextField extends StatelessWidget {
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey[500]),
         ),
-        validator: (value){
+        validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintText';
+          } else if (value == _controller.cfpassController.text.toString()) {
+            if (_controller.passController.text.toString() != value) {
+              return 'Confirm Password Didn\'t Match.';
+            }
           }
         },
       ),

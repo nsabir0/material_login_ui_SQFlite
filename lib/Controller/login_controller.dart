@@ -3,37 +3,34 @@ import 'package:get/get.dart';
 import 'package:material_login_ui/Database/sqflite_Database.dart';
 import 'package:material_login_ui/Model/userData_model.dart';
 
-class LoginController extends GetxController{
-  TextEditingController emailController= TextEditingController();
-  TextEditingController passController= TextEditingController();
+class LoginController extends GetxController {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
+  loginFunc() async {
+    MyDatabase myDatabase = MyDatabase();
+    String name = '', email = '', password = '';
 
-  loginFunc()async{
-
-    if (emailController.toString() ==null &&
-        passController.toString()== null){
-      Get.snackbar('Empty Field',  'Please fill up the field');
-      print('Empty Field');
+    List<userData_Model> info = await myDatabase.queryData();
+    for (int i = 0; i < info.length; i++) {
+      if (info[i].email == emailController.text.toString()) {
+        name = info[i].name;
+        email = info[i].email;
+        password = info[i].password;
+      }
     }
-
-    MyDatabase myDatabase=MyDatabase();
-    List<userData_Model> UserDataList= await myDatabase.getUserDataByEmail(emailController.toString());
-
-
-
-    /*if(emailController.toString() == UserDataList. && passController.toString() == UserDataList.){
-
-
-      Get.snackbar('LOG IN',  'Successful ${emailController.toString()}');
-      print('Login Successful');
+    if (email == '') {
+      Get.snackbar('User not Found !', 'Please Signup First');
     } else {
-      Get.snackbar(
-          'LOG IN', 'unsuccessful ${emailController.toString()}');
-      print('Login unsuccessful');
-    }*/
-
-
-
-
+      if (email == emailController.text.toString() &&
+          password == passController.text.toString()) {
+        Get.snackbar('Hello $name', 'Logged In successfully ');
+        passController.clear();
+        emailController.clear();
+      } else if (email == emailController.text.toString() &&
+          password != passController.text.toString()) {
+        Get.snackbar('Try Again', 'Wrong password');
+      }
+    }
   }
 }
