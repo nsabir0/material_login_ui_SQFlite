@@ -42,24 +42,21 @@ class _HomePageState extends State<HomePage> {
               MyEditField(controller: _controller.nameController, hintText: user.name),
               MyEditField(controller: _controller.emailController, hintText: user.email),
               MyEditField(controller: _controller.passController, hintText: user.password),
+
               spacing(10),
 
-              ElevatedButton(onPressed: ()async{
-
-                _controller.DeleteUser(user.email);
-
-              },
+              ElevatedButton(
+                onPressed: () async {
+                  _controller.DeleteUser(user.email);
+                },
                 style:
                 ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
-                child: const Text(
-                  'Delete Profile',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),)
-
-
+                child: const Text('Delete Profile',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+              )
             ],
           ),
         ),

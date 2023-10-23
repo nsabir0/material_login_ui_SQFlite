@@ -8,18 +8,15 @@ class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
-   userData_Model user = userData_Model(name: '', email: '', password: '');
 
   loginFunc() async {
     MyDatabase myDatabase = MyDatabase();
 
-    List<userData_Model> info = await myDatabase.getLoginUser();
-    for (int i = 0; i < info.length; i++) {
-      if (info[i].email == emailController.text.toString()) {
-        user=info[i];
-      }
-    }
+    userData_Model user = await myDatabase.getUserDataByEmail(emailController.text.toString());
+
+
     if (user.email == '') {
+
       Get.snackbar('User not Found !', 'Please Signup First');
     } else {
       if (user.email == emailController.text.toString() &&
@@ -27,11 +24,20 @@ class LoginController extends GetxController {
         Get.snackbar('Hello ${user.name}', 'Logged In successfully ');
         passController.clear();
         emailController.clear();
-        Get.to(const HomePage(), arguments: [user]);
+        Get.to(() => const HomePage(), arguments: [user]);
       } else if (user.email == emailController.text.toString() &&
           user.password != passController.text.toString()) {
         Get.snackbar('Try Again', 'Wrong password');
       }
     }
+
+
+    print('');
+    print('');
+    print('');
+    print(user.name);
+    print('');
+    print('');
+    print('');
   }
 }

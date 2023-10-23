@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/forgotpass_controller.dart';
-import 'package:material_login_ui/View/login_page.dart';
 
 class ForgotpassPage extends StatefulWidget {
   const ForgotpassPage({super.key});
@@ -15,10 +14,13 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
   Widget build(BuildContext context) {
 
     ForgotpassController _controller=Get.put(ForgotpassController());
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Form(
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,10 +48,9 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
                     suffixIcon: Icon(Icons.search),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Please enter your email address.";
                     }
-                    return null;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -57,7 +58,14 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
                 //Search Button======================================================
                 InkWell(
                   onTap: () {
-                    _controller.searchFunc();
+
+                    final FormState? form = _formKey.currentState;
+                    if (form!.validate()) {
+                      print('Form is valid');
+
+                      _controller.searchFunc();
+                    }
+
                   },
                   child: Container(
                     height: 55,

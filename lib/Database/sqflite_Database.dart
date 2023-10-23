@@ -35,21 +35,40 @@ class MyDatabase {
     return userData;
   }
 
-//Read All data from database=================================================
+//Fetch All data from database=================================================
   Future<List<userData_Model>> getLoginUser() async {
     var dbClient = await checkDB;
 
     List<Map<String, dynamic>> queryResult =
-        await dbClient!.query('userdata_tbl');
+    await dbClient!.query('userdata_tbl');
 
-    return List.generate(queryResult.length, (i) {
+    List<userData_Model> user = queryResult.isNotEmpty
+        ? queryResult.map((e) => userData_Model.fromMap(e)).toList()
+        : [userData_Model(name: '', email: '', password: '')];
+
+    return user;
+
+    /*return List.generate(queryResult.length, (i) {
       return userData_Model(
         id: queryResult[i]['id'],
         name: queryResult[i]['name'],
         email: queryResult[i]['email'],
         password: queryResult[i]['password'],
       );
-    });
+    });*/
+  }
+
+  //Fetch data by Email from database===========================================
+  getUserDataByEmail(String email) async {
+    var dbClient = await checkDB;
+    List<Map<String, dynamic>> queryResult = await dbClient!
+        .query('userdata_tbl', where: 'email = ?', whereArgs: [email]);
+
+    List<userData_Model> user = queryResult.isNotEmpty
+        ? queryResult.map((e) => userData_Model.fromMap(e)).toList()
+        : [userData_Model(name: '', email: '', password: '')];
+
+    return user[0];
   }
 
   queryData(String email) async {
@@ -57,7 +76,8 @@ class MyDatabase {
 
     //Fetching selected ROWs from UserData Table=====================================
 
-    List<Map<String, dynamic>> result = await dbClient!.rawQuery('SELECT * FROM userdata_tbl WHERE email=?', [email]);
+    List<Map<String, dynamic>> result = await dbClient!
+        .rawQuery('SELECT * FROM userdata_tbl WHERE email=?', [email]);
 
     // print the results
     print('${result[0]}');
@@ -67,24 +87,13 @@ class MyDatabase {
 
     //Returning Userdata as List of model object
     //return List.generate(result.length, (i) {
-      return userData_Model(
-        id: result[0]['id'],
-        name: result[0]['name'],
-        email: result[0]['email'],
-        password: result[0]['password'],
-      );
-   // });
-  }
-
-  //Read data by single id from database=================================================
-  Future<List<userData_Model>> getUserDataByEmail(String email) async {
-    var dbClient = await checkDB;
-    var _userData =
-    await dbClient!.query('userdata_tbl', where: 'email = ?', whereArgs: [email]);
-    List<userData_Model> UserDataList = _userData.isNotEmpty
-        ? _userData.map((e) => userData_Model.fromMap(e)).toList()
-        : [];
-    return UserDataList;
+    return userData_Model(
+      id: result[0]['id'],
+      name: result[0]['name'],
+      email: result[0]['email'],
+      password: result[0]['password'],
+    );
+    // });
   }
 
   Future<userData_Model?> getLoginUser1(String email, String password) async {
@@ -99,7 +108,6 @@ class MyDatabase {
     }*/
     //return null;
   }
-
 
 //Deleting database=================================================
   Future deleteTableContent() async {
@@ -118,7 +126,6 @@ class MyDatabase {
     );
   }
 
-
   Future<int> deleteUserData(String email) async {
     var dbClient = await checkDB;
     return await dbClient!.delete(
@@ -128,7 +135,7 @@ class MyDatabase {
     );
   }
 
-  /*Future closeDatabase() async {
+/*Future closeDatabase() async {
     var dbClient = await checkDB;
     dbClient!.close();
   }*/

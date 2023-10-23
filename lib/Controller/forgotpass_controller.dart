@@ -11,13 +11,15 @@ class ForgotpassController extends GetxController{
 searchFunc()async{
   MyDatabase myDatabase = MyDatabase();
 
-  userData_Model user = await myDatabase.queryData(searchController.text.toString());
+  userData_Model user = await myDatabase.getUserDataByEmail(searchController.text.toString());
 
+  print(user.id);
   if(user.id!=null && user.id!=0){
     pass.value=user.password;
     Get.snackbar('Hello ${user.name}',  'User found');
 
   }else {
+    pass.value='P A S S W O R D';
     Get.snackbar('Error!!!', 'User Not found');
   }
 
