@@ -3,6 +3,7 @@ import 'package:material_login_ui/Controller/login_controller.dart';
 import 'package:material_login_ui/Global_Widgets//my_password.dart';
 import 'package:material_login_ui/Global_Widgets/my_textfield.dart';
 import 'package:material_login_ui/Global_Widgets/square_tile.dart';
+import 'package:material_login_ui/View/forgotpass_page.dart';
 import 'package:material_login_ui/View/signup_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
@@ -111,14 +112,19 @@ class LoginPage extends StatelessWidget {
 Widget forgotPassword() {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 25.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Text(
-          'Forgot Password?',
-          style: TextStyle(color: Colors.grey[600]),
-        ),
-      ],
+    child: InkWell(
+      onTap: (){
+        Get.to(ForgotpassPage());
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            'Forgot Password?',
+            style: TextStyle(color: Colors.grey[600]),
+          ),
+        ],
+      ),
     ),
   );
 }

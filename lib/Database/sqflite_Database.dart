@@ -36,13 +36,20 @@ class MyDatabase {
   }
 
 //Read All data from database=================================================
-  Future<List<userData_Model>> getUserDataList() async {
+  Future<List<userData_Model>> getLoginUser() async {
     var dbClient = await checkDB;
 
-    final List<Map<String, dynamic>> queryResult =
-    await dbClient!.query('userdata_tbl');
-    List<userData_Model> getList = queryResult.map((e) => userData_Model.fromMap(e)).toList();
-    return getList;
+    List<Map<String, dynamic>> queryResult =
+        await dbClient!.query('userdata_tbl');
+
+    return List.generate(queryResult.length, (i) {
+      return userData_Model(
+        id: queryResult[i]['id'],
+        name: queryResult[i]['name'],
+        email: queryResult[i]['email'],
+        password: queryResult[i]['password'],
+      );
+    });
   }
 
   queryData() async {
@@ -83,7 +90,7 @@ class MyDatabase {
     return UserDataList;
   }
 
-  Future<userData_Model?> getLoginUser(String email, String password) async {
+  Future<userData_Model?> getLoginUser1(String email, String password) async {
     print('Email: $email, Password: $password');
     var dbClient = await checkDB;
     var res = await dbClient!.rawQuery("SELECT * FROM userdata_tbl WHERE "

@@ -12,30 +12,27 @@ class LoginController extends GetxController {
 
   loginFunc() async {
     MyDatabase myDatabase = MyDatabase();
-    String name = '', email = '', password = '';
 
-    List<userData_Model> info = await myDatabase.queryData();
+    List<userData_Model> info = await myDatabase.getLoginUser();
     for (int i = 0; i < info.length; i++) {
       if (info[i].email == emailController.text.toString()) {
-        name = info[i].name;
-        email = info[i].email;
-        password = info[i].password;
+
 
         user=info[i];
         print(user.id);
       }
     }
-    if (email == '') {
+    if (user.email == '') {
       Get.snackbar('User not Found !', 'Please Signup First');
     } else {
-      if (email == emailController.text.toString() &&
-          password == passController.text.toString()) {
-        Get.snackbar('Hello $name', 'Logged In successfully ');
+      if (user.email == emailController.text.toString() &&
+          user.password == passController.text.toString()) {
+        Get.snackbar('Hello ${user.name}', 'Logged In successfully ');
         passController.clear();
         emailController.clear();
         Get.to(HomePage(), arguments: [user]);
-      } else if (email == emailController.text.toString() &&
-          password != passController.text.toString()) {
+      } else if (user.email == emailController.text.toString() &&
+          user.password != passController.text.toString()) {
         Get.snackbar('Try Again', 'Wrong password');
       }
     }
