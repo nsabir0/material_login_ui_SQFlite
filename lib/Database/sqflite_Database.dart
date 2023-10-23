@@ -52,31 +52,28 @@ class MyDatabase {
     });
   }
 
-  queryData() async {
+  queryData(String email) async {
     var dbClient = await checkDB;
 
-    //Fetching all ROWs from UserData Table=====================================
-    List<Map<String, dynamic>> resultAll = await dbClient!.query('userdata_tbl');
+    //Fetching selected ROWs from UserData Table=====================================
 
-
-    List<userData_Model> getList = resultAll.map((e) => userData_Model.fromMap(e)).toList();
-    List<Map<String, dynamic>> result = await dbClient.rawQuery('SELECT * FROM userdata_tbl WHERE id=?', [1]);
+    List<Map<String, dynamic>> result = await dbClient!.rawQuery('SELECT * FROM userdata_tbl WHERE email=?', [email]);
 
     // print the results
-    print('${resultAll.length}');
-    resultAll.forEach((row) => print(row));
+    print('${result[0]}');
+    result.forEach((row) => print(row));
     //result.forEach((row) => print(row));
     // {_id: 2, name: Mary, age: 32}
 
     //Returning Userdata as List of model object
-    return List.generate(resultAll.length, (i) {
+    //return List.generate(result.length, (i) {
       return userData_Model(
-        id: resultAll[i]['id'],
-        name: resultAll[i]['name'],
-        email: resultAll[i]['email'],
-        password: resultAll[i]['password'],
+        id: result[0]['id'],
+        name: result[0]['name'],
+        email: result[0]['email'],
+        password: result[0]['password'],
       );
-    });
+   // });
   }
 
   //Read data by single id from database=================================================

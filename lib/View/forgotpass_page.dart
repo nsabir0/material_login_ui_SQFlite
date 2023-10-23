@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:material_login_ui/Controller/forgotpass_controller.dart';
+import 'package:material_login_ui/View/login_page.dart';
 
-class ForgotpassPage extends StatelessWidget {
+class ForgotpassPage extends StatefulWidget {
   const ForgotpassPage({super.key});
 
   @override
+  State<ForgotpassPage> createState() => _ForgotpassPageState();
+}
+
+class _ForgotpassPageState extends State<ForgotpassPage> {
+  @override
   Widget build(BuildContext context) {
+
+    ForgotpassController _controller=Get.put(ForgotpassController());
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
@@ -27,7 +37,7 @@ class ForgotpassPage extends StatelessWidget {
 
                 //Search Text field=================================================
                 TextFormField(
-                  //controller: nameController,
+                  controller: _controller.searchController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Search',
@@ -46,7 +56,9 @@ class ForgotpassPage extends StatelessWidget {
 
                 //Search Button======================================================
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    _controller.searchFunc();
+                  },
                   child: Container(
                     height: 55,
                     padding: const EdgeInsets.all(10),
@@ -69,14 +81,14 @@ class ForgotpassPage extends StatelessWidget {
                 spacing(20),
                 //view password=====================================
 
-                Card(
+                Obx(() => Card(
                   elevation: 20,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text('P A S S W O R D'),
+                    child: Text(_controller.pass.value),
                   ),
 
-                )
+                ),)
               ],
             )),
       ),

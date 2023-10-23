@@ -8,7 +8,7 @@ class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
-  late userData_Model user;
+   userData_Model user = userData_Model(name: '', email: '', password: '');
 
   loginFunc() async {
     MyDatabase myDatabase = MyDatabase();
@@ -16,10 +16,7 @@ class LoginController extends GetxController {
     List<userData_Model> info = await myDatabase.getLoginUser();
     for (int i = 0; i < info.length; i++) {
       if (info[i].email == emailController.text.toString()) {
-
-
         user=info[i];
-        print(user.id);
       }
     }
     if (user.email == '') {
@@ -30,7 +27,7 @@ class LoginController extends GetxController {
         Get.snackbar('Hello ${user.name}', 'Logged In successfully ');
         passController.clear();
         emailController.clear();
-        Get.to(HomePage(), arguments: [user]);
+        Get.to(const HomePage(), arguments: [user]);
       } else if (user.email == emailController.text.toString() &&
           user.password != passController.text.toString()) {
         Get.snackbar('Try Again', 'Wrong password');
