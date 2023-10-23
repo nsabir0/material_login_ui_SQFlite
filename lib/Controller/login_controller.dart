@@ -8,6 +8,8 @@ class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
+  late userData_Model user;
+
   loginFunc() async {
     MyDatabase myDatabase = MyDatabase();
     String name = '', email = '', password = '';
@@ -18,6 +20,9 @@ class LoginController extends GetxController {
         name = info[i].name;
         email = info[i].email;
         password = info[i].password;
+
+        user=info[i];
+        print(user.id);
       }
     }
     if (email == '') {
@@ -28,7 +33,7 @@ class LoginController extends GetxController {
         Get.snackbar('Hello $name', 'Logged In successfully ');
         passController.clear();
         emailController.clear();
-        Get.to(HomePage(), arguments: [name, email, password]);
+        Get.to(HomePage(), arguments: [user]);
       } else if (email == emailController.text.toString() &&
           password != passController.text.toString()) {
         Get.snackbar('Try Again', 'Wrong password');
