@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/signup_controller.dart';
 import 'package:material_login_ui/View/login_page.dart';
@@ -17,7 +18,6 @@ class _SignupState extends State<Signup> {
   final SignupController _controller = Get.put(SignupController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void validateAndSave() {}
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +32,18 @@ class _SignupState extends State<Signup> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                spacing(30),
+                spacing(30.h),
 
                 //Lock icon=====================================================
-                const Icon(Icons.android, size: 100),
+                 Icon(Icons.android, size: 100.h),
 
                 //Welcome Text==================================================
                 Text(
                   'Ready to join the team?',
-                  style: TextStyle(color: Colors.grey[700], fontSize: 16),
+                  style: TextStyle(color: Colors.grey[700], fontSize: 16.sp),
                 ),
 
-                spacing(15),
+                spacing(15.h),
 
                 //Fullname Text field===========================================
                 MyTextField(
@@ -51,7 +51,7 @@ class _SignupState extends State<Signup> {
                   hintText: 'Full Name',
                 ),
 
-                spacing(10),
+                spacing(10.h),
 
                 //username Text field===========================================
                 MyTextField(
@@ -59,7 +59,7 @@ class _SignupState extends State<Signup> {
                   hintText: 'Email',
                 ),
 
-                spacing(10),
+                spacing(10.h),
 
                 //password text-field===========================================
                 MyPassField(
@@ -67,7 +67,7 @@ class _SignupState extends State<Signup> {
                   hintText: 'Password',
                 ),
 
-                spacing(10),
+                spacing(10.h),
 
                 //Confirm password textfield====================================
                 MyPassField(
@@ -75,7 +75,7 @@ class _SignupState extends State<Signup> {
                   hintText: 'Confirm Password',
                 ),
 
-                spacing(25),
+                spacing(25.h),
 
                 //signin button=================================================
                 ElevatedButton(
@@ -91,21 +91,21 @@ class _SignupState extends State<Signup> {
                   },
                   style:
                   ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
+                  child:  Text(
                     'JOIN US',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        fontSize: 16.sp),
                   ),
                 ),
 
-                spacing(45),
+                spacing(45.h),
 
                 //goto loginpage text===========================================
                 loginNowText(),
 
-                spacing(45),
+                spacing(45.h),
               ],
             ),
           ),

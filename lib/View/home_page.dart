@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/profile_controller.dart';
 import 'package:material_login_ui/Global_Widgets/my_editfield.dart';
@@ -20,30 +21,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              spacing(30),
+              spacing(30.h),
 
               //Lock icon=====================================================
-              const Icon(Icons.person, size: 100),
+               Icon(Icons.person, size: 100.dm),
 
-              spacing(10),
+              spacing(10.h),
 
               //Welcome Text==================================================
               Text('Welcome back, This is your Profile',
-                  style: TextStyle(color: Colors.grey[700], fontSize: 16)),
+                  style: TextStyle(color: Colors.grey[700], fontSize: 16.sp)),
 
-              spacing(10),
+              spacing(10.h),
 
               MyEditField(controller: _controller.nameController, hintText: user.name),
               MyEditField(controller: _controller.emailController, hintText: user.email),
               MyEditField(controller: _controller.passController, hintText: user.password),
 
-              spacing(10),
+              spacing(10.h),
 
               ElevatedButton(
                 onPressed: () async {
@@ -51,11 +52,11 @@ class _HomePageState extends State<HomePage> {
                 },
                 style:
                 ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
-                child: const Text('Delete Profile',
+                child: Text('Delete Profile',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16)),
+                        fontSize: 16.sp)),
               )
             ],
           ),

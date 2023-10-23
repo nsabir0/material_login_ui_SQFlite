@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_login_ui/Controller/login_controller.dart';
 import 'package:material_login_ui/Global_Widgets//my_password.dart';
 import 'package:material_login_ui/Global_Widgets/my_textfield.dart';
@@ -25,21 +26,21 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                spacing(50),
+                spacing(50.h),
 
                 //Lock icon=====================================================
-                const Icon(Icons.android, size: 100),
+                 Icon(Icons.android, size: 100.h),
 
-                spacing(50),
+                //spacing(30.h),
 
                 //Welcome Text==================================================
                 Text('Welcome back you\'ve been missed!',
                     style: TextStyle(
                       color: Colors.grey[700],
-                      fontSize: 16,
+                      fontSize: 16.sp,
                     )),
 
-                spacing(25),
+                spacing(25.h),
 
                 //username Text field===========================================
                 MyTextField(
@@ -47,7 +48,7 @@ class LoginPage extends StatelessWidget {
                   hintText: 'Email',
                 ),
 
-                spacing(10),
+                spacing(10.h),
 
                 //password text-field===========================================
                 MyPassField(
@@ -55,12 +56,12 @@ class LoginPage extends StatelessWidget {
                   hintText: 'Password',
                 ),
 
-                spacing(10),
+                spacing(10.h),
 
                 //forgot password===============================================
                 forgotPassword(),
 
-                spacing(25),
+                spacing(25.h),
 
                 //login button==================================================
                 ElevatedButton(
@@ -75,31 +76,31 @@ class LoginPage extends StatelessWidget {
                   },
                   style:
                   ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
+                  child: Text(
                     'LOG IN',
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        fontSize: 16.sp),
                   ),
                 ),
 
-                spacing(45),
+                spacing(40.h),
 
                 //OR decider====================================================
                 orDivider(),
 
-                spacing(45),
+                spacing(40.h),
 
                 //two buttons===================================================
                 socialButtons(),
 
-                spacing(45),
+                spacing(45.h),
 
                 //register text=================================================
                 registerNowText(),
 
-                spacing(45),
+                spacing(45.h),
               ],
             ),
           ),
@@ -111,7 +112,7 @@ class LoginPage extends StatelessWidget {
 
 Widget forgotPassword() {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+    padding: EdgeInsets.symmetric(horizontal: 25.0.w),
     child: InkWell(
       onTap: (){
         Get.to(ForgotpassPage());
@@ -131,17 +132,17 @@ Widget forgotPassword() {
 
 Widget orDivider() {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+    padding: EdgeInsets.symmetric(horizontal: 25.0.w),
     child: Row(
       children: [
         Expanded(
           child: Divider(
-            thickness: 0.5,
+            thickness: 1.h,
             color: Colors.grey[500],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 10.0.w),
           child: Text(
             'Or continue with',
             style: TextStyle(color: Colors.grey[700]),
@@ -149,7 +150,7 @@ Widget orDivider() {
         ),
         Expanded(
           child: Divider(
-            thickness: 0.5,
+            thickness: 1.h,
             color: Colors.grey[500],
           ),
         ),
@@ -159,12 +160,12 @@ Widget orDivider() {
 }
 
 Widget socialButtons() {
-  return const Row(
+  return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      SquareTile(imagePath: 'lib/images/google.png'),
-      SizedBox(width: 25),
-      SquareTile(imagePath: 'lib/images/apple.png')
+      const SquareTile(imagePath: 'lib/images/google.png'),
+      SizedBox(width: 25.h),
+      const SquareTile(imagePath: 'lib/images/apple.png')
     ],
   );
 }

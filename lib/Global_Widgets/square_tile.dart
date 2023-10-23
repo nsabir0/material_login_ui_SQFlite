@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SquareTile extends StatelessWidget {
   final String imagePath;
@@ -10,13 +11,13 @@ class SquareTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.dm),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         color: Colors.grey[200],
       ),
-      child: Image.asset(imagePath, height: 35),
+      child: Image.asset(imagePath, height: 25.dm),
     );
   }
 }

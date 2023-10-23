@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/signup_controller.dart';
 
@@ -17,7 +18,7 @@ class MyTextField extends StatelessWidget {
     final SignupController _controller = Get.put(SignupController());
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      padding: EdgeInsets.symmetric(horizontal: 25.0.w),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
