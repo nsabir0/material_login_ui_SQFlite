@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Controller/signup_controller.dart';
 import 'package:material_login_ui/View/login_page.dart';
-import 'package:material_login_ui/Global_Widgets/my_button.dart';
 import 'package:material_login_ui/Global_Widgets/my_password.dart';
 import 'package:material_login_ui/Global_Widgets/my_textfield.dart';
 
@@ -35,10 +34,10 @@ class _SignupState extends State<Signup> {
               children: [
                 spacing(30),
 
-                //Lock icon=======================================================
+                //Lock icon=====================================================
                 const Icon(Icons.android, size: 100),
 
-                //Welcome Text====================================================
+                //Welcome Text==================================================
                 Text(
                   'Ready to join the team?',
                   style: TextStyle(color: Colors.grey[700], fontSize: 16),
@@ -46,7 +45,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(15),
 
-                //Fullname Text field==============================================
+                //Fullname Text field===========================================
                 MyTextField(
                   controller: _controller.nameController,
                   hintText: 'Full Name',
@@ -54,7 +53,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(10),
 
-                //username Text field==============================================
+                //username Text field===========================================
                 MyTextField(
                   controller: _controller.emailController,
                   hintText: 'Email',
@@ -62,7 +61,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(10),
 
-                //password text-field==============================================
+                //password text-field===========================================
                 MyPassField(
                   controller: _controller.passController,
                   hintText: 'Password',
@@ -70,7 +69,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(10),
 
-                //Confirm password textfield==============================================
+                //Confirm password textfield====================================
                 MyPassField(
                   controller: _controller.cfpassController,
                   hintText: 'Confirm Password',
@@ -78,7 +77,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(25),
 
-                //signin button===================================================
+                //signin button=================================================
                 ElevatedButton(
                   onPressed: () async {
                     final FormState? form = _formKey.currentState;
@@ -89,7 +88,6 @@ class _SignupState extends State<Signup> {
                       print('Form is invalid');
                     }
 
-                    Get.to(LoginPage());
                   },
                   style:
                   ElevatedButton.styleFrom(backgroundColor: Colors.black),
@@ -104,7 +102,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(45),
 
-                //register text===================================================
+                //goto loginpage text===========================================
                 loginNowText(),
 
                 spacing(45),
@@ -133,7 +131,7 @@ Widget loginNowText() {
           style: const TextStyle(color: Colors.blue),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              Get.to(const Signup());
+              Get.to(LoginPage());
             }),
     ]),
   );

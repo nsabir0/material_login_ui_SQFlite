@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Database/sqflite_Database.dart';
 import 'package:material_login_ui/Model/userData_model.dart';
+import 'package:material_login_ui/View/home_page.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -27,6 +28,7 @@ class LoginController extends GetxController {
         Get.snackbar('Hello $name', 'Logged In successfully ');
         passController.clear();
         emailController.clear();
+        Get.to(HomePage(), arguments: [name, email, password]);
       } else if (email == emailController.text.toString() &&
           password != passController.text.toString()) {
         Get.snackbar('Try Again', 'Wrong password');

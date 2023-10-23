@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:material_login_ui/Database/sqflite_Database.dart';
 import 'package:material_login_ui/Model/userData_model.dart';
+import 'package:material_login_ui/View/login_page.dart';
 
 class SignupController extends GetxController{
   TextEditingController nameController= TextEditingController();
@@ -35,5 +36,7 @@ class SignupController extends GetxController{
       Get.snackbar('Error!!!', 'Data Didn\'t Saved');
       print('Error!!!');
     }
+
+    Get.to(LoginPage());
   }
 }

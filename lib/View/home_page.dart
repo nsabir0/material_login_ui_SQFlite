@@ -13,15 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ProfileController _controller = Get.put(ProfileController());
   var userData = Get.arguments;
-/*  List country_list = [ "Bangla", "Hindi", "Urdu"];
 
-  void _incrementList() {
-    setState(() {
-      print(controller.text.toString());
-
-      country_list.add(controller.text.toString());
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +47,15 @@ class _HomePageState extends State<HomePage> {
                 _controller.DeleteUser(userData[1]);
 
               },
-                  style:
-                  ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
-          child: const Text(
-            'Delete Profile',
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16),
-          ),)
+                style:
+                ElevatedButton.styleFrom(backgroundColor: Colors.red[900]),
+                child: const Text(
+                  'Delete Profile',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                ),)
 
 
             ],

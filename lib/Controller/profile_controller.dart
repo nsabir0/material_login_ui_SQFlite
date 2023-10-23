@@ -32,8 +32,8 @@ class ProfileController extends GetxController{
   print('$returnedid');
 }
 
-  DeleteUser(int id)async{
-    await myDatabase.deleteUserData(id);
+  DeleteUser(String email)async{
+    await myDatabase.deleteUserData(email);
     Get.snackbar('Deleted',  'Data Deleted successfully ');
     Get.to(LoginPage());
   }
