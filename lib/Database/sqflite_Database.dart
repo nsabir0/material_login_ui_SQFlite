@@ -71,6 +71,17 @@ class MyDatabase {
     return user[0];
   }
 
+  //Delete user by Email========================================================
+  Future<int> deleteUserData(String email) async {
+    var dbClient = await checkDB;
+    return await dbClient!.delete(
+      'userdata_tbl',
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+  }
+
+
   queryData(String email) async {
     var dbClient = await checkDB;
 
@@ -126,14 +137,6 @@ class MyDatabase {
     );
   }
 
-  Future<int> deleteUserData(String email) async {
-    var dbClient = await checkDB;
-    return await dbClient!.delete(
-      'userdata_tbl',
-      where: 'email = ?',
-      whereArgs: [email],
-    );
-  }
 
 /*Future closeDatabase() async {
     var dbClient = await checkDB;
