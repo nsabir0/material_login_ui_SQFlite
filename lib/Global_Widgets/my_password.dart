@@ -14,7 +14,7 @@ class MyPassField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SignupController _controller = Get.put(SignupController());
+    final SignupController controllerS = Get.put(SignupController());
     var passOnOff = true.obs;
 
     return Padding(
@@ -48,11 +48,12 @@ class MyPassField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintText';
-          } else if (value == _controller.cfpassController.text.toString()) {
-            if (_controller.passController.text.toString() != value) {
+          } else if (value == controllerS.cfpassController.text.toString()) {
+            if (controllerS.passController.text.toString() != value) {
               return 'Confirm Password Didn\'t Match.';
             }
           }
+          return null;
         },
       ),
     ),

@@ -13,14 +13,14 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
   @override
   Widget build(BuildContext context) {
 
-    ForgotpassController _controller=Get.put(ForgotpassController());
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    ForgotpassController controllerF=Get.put(ForgotpassController());
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +39,7 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
 
                 //Search Text field=================================================
                 TextFormField(
-                  controller: _controller.searchController,
+                  controller: controllerF.searchController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Search',
@@ -51,6 +51,7 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
                     if (value == null || value.isEmpty) {
                       return "Please enter your email address.";
                     }
+                    return null;
                   },
                 ),
                 const SizedBox(height: 20),
@@ -59,11 +60,9 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
                 InkWell(
                   onTap: () {
 
-                    final FormState? form = _formKey.currentState;
+                    final FormState? form = formKey.currentState;
                     if (form!.validate()) {
-                      print('Form is valid');
-
-                      _controller.searchFunc();
+                      controllerF.searchFunc();
                     }
 
                   },
@@ -87,20 +86,20 @@ class _ForgotpassPageState extends State<ForgotpassPage> {
                 ),
 
                 spacing(20),
-                //view password=====================================
 
+                //view password=====================================
                 Obx(() => Card(
                   elevation: 20,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(_controller.pass.value),
+                    child: Text(controllerF.pass.value),
                   ),
 
                 ),)
               ],
             )),
       ),
-    );;
+    );
   }
 }
 

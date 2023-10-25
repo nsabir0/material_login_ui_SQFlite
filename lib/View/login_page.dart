@@ -13,14 +13,14 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final LoginController _controller = Get.put(LoginController());
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: Form(
-        key: _formKey,
+        key: formKey,
         child: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -29,7 +29,7 @@ class LoginPage extends StatelessWidget {
                 spacing(50.h),
 
                 //Lock icon=====================================================
-                 Icon(Icons.android, size: 100.h),
+                Icon(Icons.android, size: 100.dm),
 
                 //spacing(30.h),
 
@@ -66,11 +66,8 @@ class LoginPage extends StatelessWidget {
                 //login button==================================================
                 ElevatedButton(
                   onPressed: () async {
-
-                    final FormState? form = _formKey.currentState;
+                    final FormState? form = formKey.currentState;
                     if (form!.validate()) {
-                      print('Form is valid');
-
                       _controller.loginFunc();
                     }
                   },
@@ -114,8 +111,8 @@ Widget forgotPassword() {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 25.0.w),
     child: InkWell(
-      onTap: (){
-        Get.to(ForgotpassPage());
+      onTap: () {
+        Get.to(const ForgotpassPage());
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,

@@ -45,7 +45,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(15.h),
 
-                //Fullname Text field===========================================
+                //FullName Text field===========================================
                 MyTextField(
                   controller: _controller.nameController,
                   hintText: 'Full Name',
@@ -77,15 +77,12 @@ class _SignupState extends State<Signup> {
 
                 spacing(25.h),
 
-                //signin button=================================================
+                //SignIn button=================================================
                 ElevatedButton(
                   onPressed: () async {
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
-                      print('Form is valid');
                       _controller.signupFunc();
-                    } else {
-                      print('Form is invalid');
                     }
 
                   },
@@ -102,7 +99,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(45.h),
 
-                //goto loginpage text===========================================
+                //goto LoginPage text===========================================
                 loginNowText(),
 
                 spacing(45.h),
@@ -131,29 +128,8 @@ Widget loginNowText() {
           style: const TextStyle(color: Colors.blue),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              Get.to(LoginPage());
+              Get.offAll(LoginPage());
             }),
     ]),
   );
 }
-
-/*if (_controller.passController!= _controller.cfpassController){
-                        _controller.cfpassController.clear();
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Alert !'),
-                            content: const Text('Password didn\'t match.'),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                      else if (_controller.passController== _controller.cfpassController){
-                        _formKey.currentState?.save();
-                       _controller.signupFunc();
-                      }*/

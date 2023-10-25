@@ -15,14 +15,16 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SignupController _controller = Get.put(SignupController());
+    final SignupController controllerS = Get.put(SignupController());
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 25.0.w),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
-          prefixIcon:  Icon(hintText=='Email' ? Icons.email_outlined : Icons.person_outline),
+          prefixIcon: Icon(hintText == 'Email'
+              ? Icons.alternate_email
+              : Icons.person_outline),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
@@ -37,11 +39,12 @@ class MyTextField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintText';
-          } else if (value == _controller.cfpassController.text.toString()) {
-            if (_controller.passController.text.toString() != value) {
+          } else if (value == controllerS.cfpassController.text.toString()) {
+            if (controllerS.passController.text.toString() != value) {
               return 'Confirm Password Didn\'t Match.';
             }
           }
+          return null;
         },
       ),
     );

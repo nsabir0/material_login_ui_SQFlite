@@ -81,38 +81,28 @@ class MyDatabase {
     );
   }
 
-
   queryData(String email) async {
     var dbClient = await checkDB;
 
-    //Fetching selected ROWs from UserData Table=====================================
-
+    //Fetching selected ROWs from UserData Table================================
     List<Map<String, dynamic>> result = await dbClient!
         .rawQuery('SELECT * FROM userdata_tbl WHERE email=?', [email]);
 
-    // print the results
-    print('${result[0]}');
-    result.forEach((row) => print(row));
-    //result.forEach((row) => print(row));
-    // {_id: 2, name: Mary, age: 32}
-
-    //Returning Userdata as List of model object
-    //return List.generate(result.length, (i) {
     return userData_Model(
       id: result[0]['id'],
       name: result[0]['name'],
       email: result[0]['email'],
       password: result[0]['password'],
     );
-    // });
   }
 
-  Future<userData_Model?> getLoginUser1(String email, String password) async {
-    print('Email: $email, Password: $password');
+  getLoginUser1(String email, String password) async {
     var dbClient = await checkDB;
     var res = await dbClient!.rawQuery("SELECT * FROM userdata_tbl WHERE "
         "email = '$email' AND "
         "password = '$password' ");
+
+    return res;
     /*if (res.length > 0) {
       print(userData_Model.fromMap(res.first));
       return userData_Model.fromMap(res.first);
@@ -136,7 +126,6 @@ class MyDatabase {
       whereArgs: [userData.id],
     );
   }
-
 
 /*Future closeDatabase() async {
     var dbClient = await checkDB;

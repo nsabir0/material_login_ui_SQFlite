@@ -8,26 +8,43 @@ class ProfileController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  userData_Model user = Get.arguments[0];
 
   MyDatabase myDatabase = MyDatabase();
 
   saveFunc() async {
-    print(nameController.text.toString());
-    print(passController.text.toString());
-    userData_Model saveData = userData_Model(
-      name: nameController.text.toString(),
-      email: emailController.text.toString(),
-      password: passController.text.toString(),
-    );
 
-    var returnedid = await myDatabase.updateUserData(saveData);
+    if(nameController.text!=''){
+      user.name=nameController.text;
+    }
+    if(emailController.text!=''){
+      user.email=emailController.text;
+    }
+    if(passController.text!=''){
+      user.password=passController.text;
+    }
 
-    print('$returnedid');
+    var returnId = await myDatabase.updateUserData(user);
+
+
+    if(nameController.text=='' && emailController.text=='' && passController.text==''){
+
+    }else{
+      if (returnId != null && returnId != 0) {
+        Get.snackbar('Hello ${user.name}', 'Profile Updated successfully');
+      } else {
+        Get.snackbar('Error!!!', 'Data Didn\'t Saved');
+      }
+    }
+
+    nameController.clear();
+    emailController.clear();
+    passController.clear();
   }
 
-  DeleteUser(String email) async {
-    await myDatabase.deleteUserData(email);
-    Get.snackbar('Deleted', 'Data Deleted successfully ');
-    Get.to(LoginPage());
+  deleteUser() async {
+    await myDatabase.deleteUserData(user.email);
+    Get.snackbar('Deleted', 'Profile Deleted successfully ');
+    Get.offAll(LoginPage());
   }
 }

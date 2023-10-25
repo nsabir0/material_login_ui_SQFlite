@@ -8,15 +8,13 @@ class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
-
   loginFunc() async {
     MyDatabase myDatabase = MyDatabase();
 
-    userData_Model user = await myDatabase.getUserDataByEmail(emailController.text.toString());
-
+    userData_Model user =
+    await myDatabase.getUserDataByEmail(emailController.text.toString());
 
     if (user.email == '') {
-
       Get.snackbar('User not Found !', 'Please Signup First');
     } else {
       if (user.email == emailController.text.toString() &&
@@ -30,14 +28,5 @@ class LoginController extends GetxController {
         Get.snackbar('Try Again', 'Wrong password');
       }
     }
-
-
-    print('');
-    print('');
-    print('');
-    print(user.name);
-    print('');
-    print('');
-    print('');
   }
 }
