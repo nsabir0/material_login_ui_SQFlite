@@ -6,7 +6,7 @@ import '../Model/userData_model.dart';
 class MyDatabase {
   static Database? _database;
 
-//Checking if Database is null=================================================
+///Checking if Database is null=================================================
   Future<Database?> get checkDB async {
     if (_database != null) {
       return _database;
@@ -15,7 +15,7 @@ class MyDatabase {
     return _database;
   }
 
-//Initializing Database=================================================
+///Initializing Database=================================================
   initDatabase() async {
     var filePath = await getDatabasesPath();
     var dbPath = join(filePath, 'userdata_tbl.db');
@@ -23,19 +23,19 @@ class MyDatabase {
     return await openDatabase(dbPath, version: 1, onCreate: createDatabase);
   }
 
-//Creating database=================================================
+///Creating database=================================================
   createDatabase(Database db, int version) async {
     await db.execute(SqlQuery.createUserDataTable);
   }
 
-//Inserting new Notes Data in database==========================================
+///Inserting new Notes Data in database==========================================
   Future<userData_Model> insert(userData_Model userData) async {
     var dbClient = await checkDB;
     userData.id = await dbClient!.insert('userdata_tbl', userData.toMap());
     return userData;
   }
 
-//Fetch All data from database=================================================
+///Fetch All data from database=================================================
   getAllUser() async {
     var dbClient = await checkDB;
 
@@ -58,7 +58,7 @@ class MyDatabase {
     });*/
   }
 
-  //Fetch data by Email from database===========================================
+///Fetch data by Email from database===========================================
   getUserDataByEmail(String email) async {
     var dbClient = await checkDB;
     List<Map<String, dynamic>> queryResult = await dbClient!
@@ -71,7 +71,7 @@ class MyDatabase {
     return user[0];
   }
 
-  //Delete user by Email========================================================
+///Delete user by Email========================================================
   Future<int> deleteUserData(String email) async {
     var dbClient = await checkDB;
     return await dbClient!.delete(
@@ -110,13 +110,13 @@ class MyDatabase {
     //return null;
   }
 
-//Deleting database=================================================
+///Deleting database=================================================
   Future deleteTableContent() async {
     var dbClient = await checkDB;
     return await dbClient!.delete('userdata_tbl');
   }
 
-//Updating database=================================================
+///Updating database=================================================
   Future updateUserData(userData_Model userData) async {
     var dbClient = await checkDB;
     return await dbClient!.update(

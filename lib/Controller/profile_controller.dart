@@ -12,8 +12,11 @@ class ProfileController extends GetxController {
 
   MyDatabase myDatabase = MyDatabase();
 
+///===================Update UserData Functionality=============================
   saveFunc() async {
 
+
+///============Update UserData one by one if USER makes any changes=============
     if(nameController.text!=''){
       user.name=nameController.text;
     }
@@ -28,7 +31,7 @@ class ProfileController extends GetxController {
 
 
     if(nameController.text=='' && emailController.text=='' && passController.text==''){
-
+      ///if UPDATE editfields are empty then returns nothing====================
     }else{
       if (returnId != null && returnId != 0) {
         Get.snackbar('Hello ${user.name}', 'Profile Updated successfully');
@@ -42,6 +45,7 @@ class ProfileController extends GetxController {
     passController.clear();
   }
 
+///===================DELETE UserData Functionality=============================
   deleteUser() async {
     await myDatabase.deleteUserData(user.email);
     Get.snackbar('Deleted', 'Profile Deleted successfully ');

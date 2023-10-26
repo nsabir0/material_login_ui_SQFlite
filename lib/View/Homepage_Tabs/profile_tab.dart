@@ -68,12 +68,16 @@ class _ProfileTabState extends State<ProfileTab> {
                                         "This will delete your profile permanently. Are you sure?",
                                     radius: 10,
                                     actions: [
+
+///===================Alert Dialog CANCEL BUTTON================================
                                       ElevatedButton(
                                         child: const Text("Cancel"),
                                         onPressed: () {
                                           Get.back();
                                         },
                                       ),
+
+///===================Alert Dialog CONTINUE BUTTON==============================
                                       ElevatedButton(
                                         onPressed: () {
                                           Get.back();

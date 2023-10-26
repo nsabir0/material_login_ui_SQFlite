@@ -12,8 +12,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    var screenSize= MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return ScreenUtilInit(
       designSize: Size(screenSize.width, screenSize.height),
       minTextAdapt: true,
