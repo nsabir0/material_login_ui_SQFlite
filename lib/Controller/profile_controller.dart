@@ -45,6 +45,6 @@ class ProfileController extends GetxController {
   deleteUser() async {
     await myDatabase.deleteUserData(user.email);
     Get.snackbar('Deleted', 'Profile Deleted successfully ');
-    Get.offAll(LoginPage());
+    Get.offAll(() => LoginPage());
   }
 }

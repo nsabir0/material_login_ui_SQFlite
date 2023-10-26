@@ -22,12 +22,15 @@ class SignupController extends GetxController {
 
     if (model.id != null && model.id != 0) {
       Get.snackbar('Hello ${model.name}', 'Registration Successful');
+
+      Get.to(() => LoginPage());
+
       nameController.clear();
       passController.clear();
       emailController.clear();
       cfpassController.clear();
 
-      Get.offAll(LoginPage());
+
     } else {
       Get.snackbar('Registration Unsuccessful', 'Data Didn\'t Saved !');
     }

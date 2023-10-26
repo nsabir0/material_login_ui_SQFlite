@@ -18,7 +18,6 @@ class _SignupState extends State<Signup> {
   final SignupController _controller = Get.put(SignupController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,18 +33,16 @@ class _SignupState extends State<Signup> {
               children: [
                 spacing(30.h),
 
-                //Lock icon=====================================================
-                 Icon(Icons.android, size: 100.h),
+                ///Lock icon=====================================================
+                Icon(Icons.android, size: 100.h),
 
-                //Welcome Text==================================================
-                Text(
-                  'Ready to join the team?',
-                  style: TextStyle(color: Colors.grey[700], fontSize: 16.sp),
-                ),
+                ///Welcome Text==================================================
+                Text('Ready to join the team?',
+                    style: TextStyle(color: Colors.grey[700], fontSize: 16.sp)),
 
                 spacing(15.h),
 
-                //FullName Text field===========================================
+                ///FullName Text field===========================================
                 MyTextField(
                   controller: _controller.nameController,
                   hintText: 'Full Name',
@@ -53,7 +50,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(10.h),
 
-                //username Text field===========================================
+                ///username Text field===========================================
                 MyTextField(
                   controller: _controller.emailController,
                   hintText: 'Email',
@@ -61,7 +58,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(10.h),
 
-                //password text-field===========================================
+                ///password text-field===========================================
                 MyPassField(
                   controller: _controller.passController,
                   hintText: 'Password',
@@ -69,7 +66,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(10.h),
 
-                //Confirm password textfield====================================
+                ///Confirm password textfield====================================
                 MyPassField(
                   controller: _controller.cfpassController,
                   hintText: 'Confirm Password',
@@ -77,29 +74,26 @@ class _SignupState extends State<Signup> {
 
                 spacing(25.h),
 
-                //SignIn button=================================================
+                ///SignIn button=================================================
                 ElevatedButton(
                   onPressed: () async {
                     final FormState? form = _formKey.currentState;
                     if (form!.validate()) {
                       _controller.signupFunc();
                     }
-
                   },
                   style:
                   ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child:  Text(
-                    'JOIN US',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp),
-                  ),
+                  child: Text('JOIN US',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp)),
                 ),
 
                 spacing(45.h),
 
-                //goto LoginPage text===========================================
+                ///goto LoginPage text===========================================
                 loginNowText(),
 
                 spacing(45.h),
@@ -128,7 +122,7 @@ Widget loginNowText() {
           style: const TextStyle(color: Colors.blue),
           recognizer: TapGestureRecognizer()
             ..onTap = () {
-              Get.offAll(LoginPage());
+              Get.offAll(() => LoginPage());
             }),
     ]),
   );
