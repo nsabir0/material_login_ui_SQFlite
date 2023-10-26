@@ -39,10 +39,11 @@ class MyTextField extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Please enter $hintText';
-          } else if (value == controllerS.cfpassController.text.toString()) {
-            if (controllerS.passController.text.toString() != value) {
-              return 'Confirm Password Didn\'t Match.';
-            }
+          } else if (value == controllerS.emailController.text.toString()) {
+            final bool emailValid =
+            RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                .hasMatch(value);
+            return emailValid ? null : 'Invalid email address';
           }
           return null;
         },

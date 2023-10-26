@@ -28,12 +28,11 @@ class LoginPage extends StatelessWidget {
               children: [
                 spacing(50.h),
 
-                //Lock icon=====================================================
+                ///Lock icon=====================================================
                 Icon(Icons.android, size: 100.dm),
 
-                //spacing(30.h),
 
-                //Welcome Text==================================================
+                ///Welcome Text==================================================
                 Text('Welcome back you\'ve been missed!',
                     style: TextStyle(
                       color: Colors.grey[700],
@@ -42,7 +41,7 @@ class LoginPage extends StatelessWidget {
 
                 spacing(25.h),
 
-                //username Text field===========================================
+                ///username Text field===========================================
                 MyTextField(
                   controller: _controller.emailController,
                   hintText: 'Email',
@@ -50,7 +49,7 @@ class LoginPage extends StatelessWidget {
 
                 spacing(10.h),
 
-                //password text-field===========================================
+                ///password text-field===========================================
                 MyPassField(
                   controller: _controller.passController,
                   hintText: 'Password',
@@ -58,12 +57,12 @@ class LoginPage extends StatelessWidget {
 
                 spacing(10.h),
 
-                //forgot password===============================================
+                ///forgot password===============================================
                 forgotPassword(),
 
                 spacing(25.h),
 
-                //login button==================================================
+                ///login button==================================================
                 ElevatedButton(
                   onPressed: () async {
                     final FormState? form = formKey.currentState;
@@ -84,18 +83,34 @@ class LoginPage extends StatelessWidget {
 
                 spacing(40.h),
 
-                //OR decider====================================================
+                ///OR decider====================================================
                 orDivider(),
 
                 spacing(40.h),
 
-                //two buttons===================================================
+                ///two buttons===================================================
                 socialButtons(),
 
                 spacing(45.h),
 
-                //register text=================================================
-                registerNowText(),
+                ///register text=================================================
+            RichText(
+              text: TextSpan(children: [
+                const TextSpan(
+                  text: 'Not a member?  ',
+                  style: TextStyle(color: Colors.black),
+                ),
+                TextSpan(
+                    text: 'Register Now',
+                    style: const TextStyle(color: Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                      _controller.emailController.clear();
+                      _controller.passController.clear();
+                        Get.to(() => const Signup());
+                      }),
+              ]),
+            ),
 
                 spacing(45.h),
               ],
@@ -169,22 +184,4 @@ Widget socialButtons() {
 
 Widget spacing(double h) {
   return SizedBox(height: h);
-}
-
-Widget registerNowText() {
-  return RichText(
-    text: TextSpan(children: [
-      const TextSpan(
-        text: 'Not a member?  ',
-        style: TextStyle(color: Colors.black),
-      ),
-      TextSpan(
-          text: 'Register Now',
-          style: const TextStyle(color: Colors.blue),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              Get.to(const Signup());
-            }),
-    ]),
-  );
 }

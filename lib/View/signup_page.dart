@@ -94,7 +94,25 @@ class _SignupState extends State<Signup> {
                 spacing(45.h),
 
                 ///goto LoginPage text===========================================
-                loginNowText(),
+                RichText(
+                  text: TextSpan(children: [
+                    const TextSpan(
+                      text: 'Already a member?  ',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    TextSpan(
+                        text: 'Login Now',
+                        style: const TextStyle(color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            _controller.nameController.clear();
+                            _controller.emailController.clear();
+                            _controller.passController.clear();
+                            _controller.cfpassController.clear();
+                            Get.offAll(() => LoginPage());
+                          }),
+                  ]),
+                ),
 
                 spacing(45.h),
               ],
@@ -108,22 +126,4 @@ class _SignupState extends State<Signup> {
 
 Widget spacing(double h) {
   return SizedBox(height: h);
-}
-
-Widget loginNowText() {
-  return RichText(
-    text: TextSpan(children: [
-      const TextSpan(
-        text: 'Already a member?  ',
-        style: TextStyle(color: Colors.black),
-      ),
-      TextSpan(
-          text: 'Login Now',
-          style: const TextStyle(color: Colors.blue),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              Get.offAll(() => LoginPage());
-            }),
-    ]),
-  );
 }

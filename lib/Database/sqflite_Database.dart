@@ -36,7 +36,7 @@ class MyDatabase {
   }
 
 //Fetch All data from database=================================================
-  Future<List<userData_Model>> getLoginUser() async {
+  getAllUser() async {
     var dbClient = await checkDB;
 
     List<Map<String, dynamic>> queryResult =

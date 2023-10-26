@@ -18,21 +18,22 @@ class SignupController extends GetxController {
       password: passController.text.toString(),
     );
 
-    userData_Model model = await myDatabase.insert(saveData);
+    userData_Model user = await myDatabase.getUserDataByEmail(saveData.email);
 
-    if (model.id != null && model.id != 0) {
-      Get.snackbar('Hello ${model.name}', 'Registration Successful');
-
-      Get.to(() => LoginPage());
-
-      nameController.clear();
-      passController.clear();
-      emailController.clear();
-      cfpassController.clear();
-
-
+    if (user.id != null && user.id != 0) {
+      Get.snackbar('Sorry !!!', 'Email already in use');
     } else {
-      Get.snackbar('Registration Unsuccessful', 'Data Didn\'t Saved !');
+      userData_Model model = await myDatabase.insert(saveData);
+      if (model.id != null && model.id != 0) {
+        Get.snackbar('Hello ${model.name}', 'Registration Successful');
+
+        Get.to(() => LoginPage());
+
+        nameController.clear();
+        passController.clear();
+        emailController.clear();
+        cfpassController.clear();
+      }
     }
   }
 }
