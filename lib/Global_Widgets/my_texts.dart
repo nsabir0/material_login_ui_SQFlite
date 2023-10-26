@@ -17,6 +17,7 @@ class MyTexts extends StatelessWidget {
 
     return Card(
       elevation: 20,
+      color: Colors.deepPurple[200],
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical:  10.h),
         child: Column(
@@ -25,7 +26,7 @@ class MyTexts extends StatelessWidget {
               height: 50.h,
               child: Card(
                 elevation: 20,
-                color: Colors.grey[300],
+                color: Colors.deepPurple[100],
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 9.h),
                   child: Row(
@@ -44,7 +45,7 @@ class MyTexts extends StatelessWidget {
               height: 50.h,
               child: Card(
                 elevation: 20,
-                color: Colors.grey[300],
+                color: Colors.deepPurple[100],
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Row(
@@ -63,7 +64,7 @@ class MyTexts extends StatelessWidget {
               height: 50.h,
               child: Card(
                 elevation: 20,
-                color: Colors.grey[300],
+                color: Colors.deepPurple[100],
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Row(

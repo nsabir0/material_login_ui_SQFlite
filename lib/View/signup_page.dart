@@ -93,7 +93,7 @@ class _SignupState extends State<Signup> {
 
                 spacing(45.h),
 
-                ///goto LoginPage text===========================================
+///===============goto LoginPage text===========================================
                 RichText(
                   text: TextSpan(children: [
                     const TextSpan(

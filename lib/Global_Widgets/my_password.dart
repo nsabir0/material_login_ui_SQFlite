@@ -19,44 +19,48 @@ class MyPassField extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: Obx(() =>TextFormField(
-        controller: controller,
-        obscureText: passOnOff.value,
-        decoration: InputDecoration(
-          prefixIcon:  Icon(hintText=='Password' ? Icons.lock_outlined : Icons.lock_clock_outlined),
-          suffixIcon: InkWell(
-            onTap: () {
-              passOnOff.value=!passOnOff.value;
-            },
-            child:  Icon(passOnOff.value
-                ? Icons.visibility_off
-                : Icons.visibility),
-
+      child: Obx(
+        () => TextFormField(
+          controller: controller,
+          obscureText: passOnOff.value,
+          decoration: InputDecoration(
+            prefixIcon: Icon(hintText == 'Password'
+                ? Icons.lock_outlined
+                : Icons.lock_clock_outlined),
+            suffixIcon: InkWell(
+              onTap: () {
+                passOnOff.value = !passOnOff.value;
+              },
+              child: Icon(
+                  passOnOff.value ? Icons.visibility_off : Icons.visibility),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade400),
+            ),
+            fillColor: Colors.grey.shade200,
+            filled: true,
+            hintText: hintText,
+            hintStyle: TextStyle(color: Colors.grey[500]),
           ),
-
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade400),
-          ),
-          fillColor: Colors.grey.shade200,
-          filled: true,
-          hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey[500]),
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter $hintText';
-          } else if (value == controllerS.cfpassController.text.toString()) {
-            if (controllerS.passController.text.toString() != value) {
-              return 'Confirm Password Didn\'t Match.';
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter $hintText';
+            } else if (value == controllerS.passController.text.toString()) {
+              if (controllerS.passController.text.length < 6) {
+                return 'Password should be at least 6 character';
+              }
+            } else if (value == controllerS.cfpassController.text.toString()) {
+              if (controllerS.passController.text.toString() != value) {
+                return 'Confirm Password Didn\'t Match.';
+              }
             }
-          }
-          return null;
-        },
+            return null;
+          },
+        ),
       ),
-    ),
     );
   }
 }
