@@ -35,6 +35,7 @@ class MyEditField extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: TextField(
+                        autofocus: true,
                         controller: controllerP.nameController,
                         decoration: InputDecoration(
                           hintText: name,
