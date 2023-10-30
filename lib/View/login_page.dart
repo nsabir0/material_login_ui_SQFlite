@@ -120,68 +120,70 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget forgotPassword() {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 25.0.w),
-    child: InkWell(
-      onTap: () {
-        Get.to(const ForgotpassPage());
-      },
+  Widget forgotPassword() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25.0.w),
+      child: InkWell(
+        onTap: () {
+          Get.to(const ForgotpassPage());
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              'Forgot Password?',
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget orDivider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25.0.w),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            'Forgot Password?',
-            style: TextStyle(color: Colors.grey[600]),
+          Expanded(
+            child: Divider(
+              thickness: 1.h,
+              color: Colors.grey[500],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+            child: Text(
+              'Or continue with',
+              style: TextStyle(color: Colors.grey[700]),
+            ),
+          ),
+          Expanded(
+            child: Divider(
+              thickness: 1.h,
+              color: Colors.grey[500],
+            ),
           ),
         ],
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget orDivider() {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 25.0.w),
-    child: Row(
+  Widget socialButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Divider(
-            thickness: 1.h,
-            color: Colors.grey[500],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0.w),
-          child: Text(
-            'Or continue with',
-            style: TextStyle(color: Colors.grey[700]),
-          ),
-        ),
-        Expanded(
-          child: Divider(
-            thickness: 1.h,
-            color: Colors.grey[500],
-          ),
-        ),
+        const SquareTile(imagePath: 'lib/images/google.png'),
+        SizedBox(width: 25.h),
+        const SquareTile(imagePath: 'lib/images/apple.png')
       ],
-    ),
-  );
+    );
+  }
+
+  Widget spacing(double h) {
+    return SizedBox(height: h);
+  }
+
 }
 
-Widget socialButtons() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      const SquareTile(imagePath: 'lib/images/google.png'),
-      SizedBox(width: 25.h),
-      const SquareTile(imagePath: 'lib/images/apple.png')
-    ],
-  );
-}
-
-Widget spacing(double h) {
-  return SizedBox(height: h);
-}
